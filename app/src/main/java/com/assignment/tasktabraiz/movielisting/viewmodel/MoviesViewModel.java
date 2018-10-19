@@ -29,8 +29,8 @@ public class MoviesViewModel extends AndroidViewModel {
     }
 
 
-    public Call<BaseResponse< List<MovieData> >> getMovies() {
-        return dataManager.discoverMovies(null);
+    public Call<BaseResponse< List<MovieData> >> getMovies(int pageNum) {
+        return dataManager.discoverMovies(pageNum);
     }
 
     public Picasso getPicasso() {

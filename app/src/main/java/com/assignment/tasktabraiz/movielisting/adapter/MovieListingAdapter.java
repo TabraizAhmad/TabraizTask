@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.assignment.tasktabraiz.R;
@@ -17,22 +18,40 @@ import java.util.List;
 public class MovieListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<MovieData> movieDataList;
-    private final int NO_MOVIE = 0;
-    private static Picasso picasso;
+    private Picasso picasso;
 
     private boolean isLoadingAdded = false;
+
+    private final int NO_MOVIE = 0;
     private static final int ITEM = 0;
     private static final int LOADING = 1;
+
+    public MovieListingAdapter(Picasso picasso) {
+        this.picasso = picasso;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        RowMovieBinding rowMovieBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()),
-                R.layout.row_movie,
-                parent,
-                false, new DefaultDataBindingComponent(picasso));
-        return new BindingHolder(rowMovieBinding);    }
+        RecyclerView.ViewHolder viewHolder;
+        switch (viewType){
+            case ITEM:
+                RowMovieBinding rowMovieBinding = DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.getContext()),
+                        R.layout.row_movie,
+                        parent,
+                        false, new DefaultDataBindingComponent(picasso));
+                viewHolder = new BindingHolder(rowMovieBinding);
+                break;
+            case LOADING:
+            default:
+                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+                View viewLoading = inflater.inflate(R.layout.row_progress, parent, false);
+                viewHolder = new LoadingVH(viewLoading);
+                break;
+        }
+        return viewHolder;
+    }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -61,9 +80,34 @@ public class MovieListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 
-    public void addMovie(MovieData movieData) {
+    public void add(MovieData movieData) {
         movieDataList.add(movieData);
         notifyItemChanged(movieDataList.size() -1);
+    }
+
+    public void addLoadingFooter() {
+        isLoadingAdded = true;
+        add(new MovieData());
+    }
+
+    public void addAll(List<MovieData> moveResults) {
+        for (MovieData data : moveResults) {
+            add(data);
+        }
+    }
+
+    public void removeLoadingFooter() {
+        isLoadingAdded = false;
+
+        int position = movieDataList.size() - 1;
+        if(position > 0){
+            MovieData movieData = movieDataList.get(position);
+            if (movieData != null) {
+                movieDataList.remove(position);
+                notifyItemRemoved(position);
+            }
+        }
+
     }
 
 
@@ -76,8 +120,12 @@ public class MovieListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    public MovieListingAdapter(Picasso picasso) {
-        MovieListingAdapter.picasso = picasso;
+
+    protected class LoadingVH extends RecyclerView.ViewHolder{
+        LoadingVH(View itemView) {
+            super(itemView);
+        }
     }
+
 
 }
