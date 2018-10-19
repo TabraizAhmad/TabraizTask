@@ -3,7 +3,7 @@ package com.assignment.tasktabraiz.application;
 import android.app.Application;
 import android.content.Context;
 
-import com.assignment.tasktabraiz.network.DataManager;
+import com.assignment.tasktabraiz.movielisting.repository.MoviesRepository;
 import com.assignment.tasktabraiz.network.RetrofitHelper;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso;
 import okhttp3.OkHttpClient;
 
 public class TaskApplication extends Application {
-    private DataManager dataManager;
+    private MoviesRepository moviesRepository;
     private Picasso picasso;
     private RetrofitHelper retrofitHelper;
     @Override
@@ -23,7 +23,7 @@ public class TaskApplication extends Application {
                 .downloader(new OkHttp3Downloader(okHttpClient))
                 .build();
         retrofitHelper = new RetrofitHelper();
-        dataManager = new DataManager(retrofitHelper.getWebService());
+        moviesRepository = new MoviesRepository(retrofitHelper.getWebService());
     }
 
     public static TaskApplication get(Context context){
@@ -34,7 +34,7 @@ public class TaskApplication extends Application {
         return picasso;
     }
 
-    public DataManager getDataManager() {
-        return dataManager;
+    public MoviesRepository getMoviesRepository() {
+        return moviesRepository;
     }
 }

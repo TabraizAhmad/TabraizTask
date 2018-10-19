@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.assignment.tasktabraiz.R;
 import com.assignment.tasktabraiz.databinding.RowMovieBinding;
 import com.assignment.tasktabraiz.movielisting.model.MovieData;
-import com.assignment.tasktabraiz.movielisting.viewmodel.databindingdefaults.DefaultDataBindingComponent;
+import com.assignment.tasktabraiz.movielisting.databindingdefaults.DefaultDataBindingComponent;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

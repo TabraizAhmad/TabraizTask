@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.assignment.tasktabraiz.R;
-import com.assignment.tasktabraiz.base.model.BaseResponse;
 import com.assignment.tasktabraiz.base.view.BaseFragment;
 import com.assignment.tasktabraiz.movielisting.adapter.MovieListingAdapter;
 import com.assignment.tasktabraiz.movielisting.listener.PaginationScrollListener;
@@ -22,10 +21,6 @@ import com.assignment.tasktabraiz.movielisting.viewmodel.MoviesViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MovieListingFragment extends BaseFragment {
 
@@ -78,63 +73,59 @@ public class MovieListingFragment extends BaseFragment {
         loadNextPage();
     }
 
+
     private void loadNextPage() {
-        Call<BaseResponse <List<MovieData>>> movielistCall = moviesViewModel.getMovies(currentPage);
+        moviesViewModel.discoverMovies(currentPage)
+                .observe(this, response -> {
 
-        movielistCall.enqueue(new Callback<BaseResponse<List<MovieData>>>() {
-            @Override
-            public void onResponse(Call<BaseResponse<List<MovieData>>> call, Response<BaseResponse<List<MovieData>>> response) {
-                BaseResponse<List<MovieData>> responseBody = response.body();
-                movieListingAdapter.removeLoadingFooter();
-                isLoading = false;
+                    if (response != null) {
+                        List<MovieData> movieDataList = response.getResults();
+                        movieListingAdapter.removeLoadingFooter();
+                        isLoading = false;
 
-                movieListingAdapter.addAll( responseBody.getResults() );
-                TOTAL_PAGES = responseBody.getTotalPages();
+                        movieListingAdapter.addAll( movieDataList );
+                        TOTAL_PAGES = response.getTotalPages();
 
-                if (currentPage <= TOTAL_PAGES)
-                    movieListingAdapter.addLoadingFooter();
-                else isLastPage = true;
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<BaseResponse<List<MovieData>>> call, Throwable t) {
-
-            }
-        });
+                        if (currentPage <= TOTAL_PAGES)
+                            movieListingAdapter.addLoadingFooter();
+                        else isLastPage = true;
+                    }
+                });
     }
 
     private void initRecyclerView() {
+        if(movieListingAdapter == null){
+            movieListingAdapter = new MovieListingAdapter( moviesViewModel.getPicasso() );
+            List<MovieData> movieDataArrayList = new ArrayList<>();
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            moviesListRecyclerView.setLayoutManager(linearLayoutManager);
+            moviesListRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            movieListingAdapter.setItems(movieDataArrayList);
+            moviesListRecyclerView.setAdapter(movieListingAdapter);
+            moviesListRecyclerView.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
+                @Override
+                protected void loadMoreItems() {
+                    isLoading = true;
+                    currentPage += 1;
+                    loadNextPage();
+                }
 
-        movieListingAdapter = new MovieListingAdapter( moviesViewModel.getPicasso() );
-        List<MovieData> movieDataArrayList = new ArrayList<>();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        moviesListRecyclerView.setLayoutManager(linearLayoutManager);
-        moviesListRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        movieListingAdapter.setItems(movieDataArrayList);
-        moviesListRecyclerView.setAdapter(movieListingAdapter);
-        moviesListRecyclerView.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
-            @Override
-            protected void loadMoreItems() {
-                isLoading = true;
-                currentPage += 1;
+                @Override
+                public int getTotalPageCount() {
+                    return TOTAL_PAGES;
+                }
 
-                loadNextPage();
-            }
+                @Override
+                public boolean isLastPage() {
+                    return isLastPage;
+                }
 
-            @Override
-            public int getTotalPageCount() {
-                return TOTAL_PAGES;
-            }
+                @Override
+                public boolean isLoading() {
+                    return isLoading;
+                }
+            });
+        }
 
-            @Override
-            public boolean isLastPage() {
-                return isLastPage;
-            }
-
-            @Override
-            public boolean isLoading() {
-                return isLoading;
-            }
-        });
     }
 }
