@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <data>
+        <variable name="viewModel" type="com.assignment.tasktabraiz.moviedetail.model.MovieDetail"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="@dimen/padding_8dp"
+        >
+
+        <ImageView
+            android:id="@+id/movieImage"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            app:posterPath="@{viewModel.posterPath}"
+            android:contentDescription="@string/movie_poster" />
+
+
+        <TextView
+            style="@android:style/TextAppearance.Large"
+            android:id="@+id/movieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.title}"
+            android:layout_toRightOf="@+id/movieImage"
+            android:layout_toEndOf="@+id/movieImage"
+            android:padding="@dimen/padding_4dp"
+            />
+
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:id="@+id/movieOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movieTitle"
+            android:layout_toRightOf="@id/movieImage"
+            android:text="@{viewModel.overview}"
+            android:layout_toEndOf="@id/movieImage"
+            android:padding="@dimen/padding_4dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            />
+
+
+        <TextView
+            android:id="@+id/releaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movieOverview"
+            android:layout_toRightOf="@id/movieImage"
+            android:text="@{viewModel.releaseDate}"
+            android:layout_toEndOf="@id/movieImage"
+            android:padding="@dimen/padding_4dp"
+            />
+
+    </RelativeLayout>
+</layout>

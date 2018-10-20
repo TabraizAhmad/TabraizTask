@@ -25,7 +25,6 @@ public class MovieListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private final int NO_MOVIE = 0;
     private static final int ITEM = 0;
     private static final int LOADING = 1;
-
     public MovieListingAdapter(Picasso picasso) {
         this.picasso = picasso;
     }

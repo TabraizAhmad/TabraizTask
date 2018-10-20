@@ -32,11 +32,15 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     EditText etReleaseDateGTE;
 
     Button btnApply;
+    Button btnClearFilter;
+
     String releaseBeforeDate;
     String releaseAfterDate;
-    Calendar dateCalendar;
-    private FilterModel filterModel;
     String myFormat = "yyyy-MM-dd";
+
+    Calendar dateCalendar;
+
+    private FilterModel filterModel;
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
     public FilterFragment() {
@@ -80,10 +84,13 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
         etReleaseDateLTE = view.findViewById(R.id.etReleaseDateLTE);
         etReleaseDateGTE = view.findViewById(R.id.etReleaseDateGTE);
         btnApply = view.findViewById(R.id.btnApply);
+        btnClearFilter = view.findViewById(R.id.btnClearFilter);
 
+        btnClearFilter.setOnClickListener(this);
         etReleaseDateLTE.setOnClickListener(this);
         etReleaseDateGTE.setOnClickListener(this);
         btnApply.setOnClickListener(this);
+
         return view;
     }
 
@@ -137,6 +144,12 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btnApply:
                 openListingFragment();
+                break;
+            case R.id.btnClearFilter:
+                filterModel.setReleaseBeforeDate("");
+                filterModel.setReleaseAfterDate("");
+                openListingFragment();
+                break;
         }
     }
 

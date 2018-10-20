@@ -50,6 +50,18 @@
             />
 
         <Button
+            android:id="@+id/btnClearFilter"
+            style="?android:textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_filter"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/margin_6dp"
+            android:layout_toLeftOf="@+id/btnApply"
+            android:layout_toStartOf="@+id/btnApply"
+            android:layout_below="@+id/etReleaseDateLTE"/>
+
+        <Button
             android:id="@+id/btnApply"
             style="?android:textAppearanceSmall"
             android:layout_width="wrap_content"

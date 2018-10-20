@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 
 import com.assignment.tasktabraiz.base.model.BaseResponse;
 import com.assignment.tasktabraiz.moviedetail.model.MovieData;
+import com.assignment.tasktabraiz.moviedetail.model.MovieDetail;
 import com.assignment.tasktabraiz.network.WebService;
 
 import java.util.List;
@@ -38,6 +39,23 @@ public class MoviesRepository {
 
             @Override
             public void onFailure(@NonNull Call<BaseResponse<List<MovieData>>> call, @NonNull Throwable t) {
+                data.setValue(null);
+            }
+        });
+        return data;
+    }
+
+    public LiveData<MovieDetail> getMovieDetail(Integer movieId) {
+        final MutableLiveData<MovieDetail> data = new MutableLiveData<>();
+        Call<MovieDetail> movieDetailCall = webService.getMovieDetail(movieId);
+        movieDetailCall.enqueue(new Callback<MovieDetail>() {
+            @Override
+            public void onResponse(@NonNull Call<MovieDetail> call, @NonNull Response<MovieDetail> response) {
+                data.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<MovieDetail> call, @NonNull Throwable t) {
                 data.setValue(null);
             }
         });

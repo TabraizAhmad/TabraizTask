@@ -18,18 +18,18 @@ import com.assignment.tasktabraiz.R;
 import com.assignment.tasktabraiz.base.view.BaseFragment;
 import com.assignment.tasktabraiz.moviedetail.adapter.MovieListingAdapter;
 import com.assignment.tasktabraiz.moviedetail.listener.PaginationScrollListener;
+import com.assignment.tasktabraiz.moviedetail.listener.RecyclerItemClickListener;
 import com.assignment.tasktabraiz.moviedetail.model.MovieData;
 import com.assignment.tasktabraiz.moviedetail.viewmodel.MoviesViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieListingFragment extends BaseFragment implements View.OnClickListener {
+public class MovieListingFragment extends BaseFragment implements View.OnClickListener{
 
     private RecyclerView moviesListRecyclerView;
 
     private Button btnFilter;
-    private Button btnClearFilter;
 
     private MovieListingAdapter movieListingAdapter;
 
@@ -78,9 +78,8 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
         View view =  inflater.inflate(R.layout.fragment_movie_listing, container, false);
         moviesListRecyclerView = view.findViewById(R.id.moviesList);
         btnFilter = view.findViewById(R.id.btnFilter);
-        btnClearFilter = view.findViewById(R.id.btnClearFilter);
         btnFilter.setOnClickListener(this);
-        btnClearFilter.setOnClickListener(this);
+        currentPage = PAGE_START;
         if (getArguments() != null) {
             lteReleaseDate = getArguments().getString(ARG_BEFORE);
             gteReleaseDate = getArguments().getString(ARG_AFTER);
@@ -155,6 +154,27 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
                 }
             });
 
+            moviesListRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
+                    getActivity(), moviesListRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    if(movieDataArrayList.get(position) != null){
+                        Integer movieId = movieDataArrayList.get(position).getId();
+                        openMovieDetailFragment(movieId);
+                    }
+                }
+
+                @Override
+                public void onItemLongClick(View view, int position) {
+
+                }
+            }
+            ));
+    }
+
+    private void openMovieDetailFragment(int movieId) {
+        MovieDetailFragment fragment = MovieDetailFragment.newInstance(movieId);
+        fragmentTrasition(fragment);
     }
 
     @Override
@@ -163,15 +183,6 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
             case R.id.btnFilter:
                 openFilterFragment();
                 break;
-            case R.id.btnClearFilter:
-                if(lteReleaseDate.length() > 0 || gteReleaseDate.length() > 0){
-                    lteReleaseDate="";
-                    gteReleaseDate="";
-                    movieListingAdapter.clearAll();
-                    currentPage = 1;
-                    initRecyclerView();
-                    loadDataFromApi();
-                }
 
         }
 
@@ -179,11 +190,7 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
 
 
     private void openFilterFragment() {
-
         FilterFragment filterFragment = FilterFragment.newInstance(lteReleaseDate,gteReleaseDate);
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, filterFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        fragmentTrasition(filterFragment);
     }
 }
