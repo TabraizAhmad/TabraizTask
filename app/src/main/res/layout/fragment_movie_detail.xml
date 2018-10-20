@@ -47,21 +47,61 @@
                 android:text="@{viewModel.overview}"
                 android:layout_toEndOf="@id/movieImage"
                 android:padding="@dimen/padding_4dp"
-                android:ellipsize="end"
-                android:maxLines="3"
                 />
 
-
+            <TextView
+                android:id="@+id/labelReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/release_date"
+                android:layout_below="@+id/movieImage"
+                android:textStyle="bold"
+                />
             <TextView
                 android:id="@+id/releaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/movieOverview"
-                android:layout_toRightOf="@id/movieImage"
+                android:layout_below="@+id/movieImage"
                 android:text="@{viewModel.releaseDate}"
-                android:layout_toEndOf="@id/movieImage"
-                android:padding="@dimen/padding_4dp"
+                android:layout_toRightOf="@+id/labelReleaseDate"
+                android:layout_toEndOf="@+id/labelReleaseDate" />
+
+            <TextView
+                android:id="@+id/labelAdult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/plus_18"
+                android:layout_below="@+id/labelReleaseDate"
+                android:textStyle="bold"
+
                 />
+            <TextView
+                android:id="@+id/adult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelReleaseDate"
+                android:text="@{viewModel.adult}"
+                android:layout_toRightOf="@+id/labelReleaseDate"
+                android:layout_toEndOf="@+id/labelReleaseDate" />
+
+            <TextView
+                android:id="@+id/labelBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/budget"
+                android:layout_below="@+id/labelAdult"
+                android:textStyle="bold"
+
+                />
+            <TextView
+                android:id="@+id/budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelAdult"
+                android:text="@{viewModel.budget}"
+                android:layout_toRightOf="@+id/labelBudget"
+                android:layout_toEndOf="@+id/labelBudget" />
+
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleLarge"
