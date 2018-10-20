@@ -43,8 +43,8 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
     private boolean isLastPage =false;
     private boolean isLoading = false;
 
-    private String lteReleaseDate = null;
-    private String gteReleaseDate = null;
+    private String lteReleaseDate = "";
+    private String gteReleaseDate = "";
 
     public static final String ARG_BEFORE = "beforeDate";
     public static final String ARG_AFTER = "afterDate";
@@ -164,11 +164,15 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
                 openFilterFragment();
                 break;
             case R.id.btnClearFilter:
-                lteReleaseDate="";
-                gteReleaseDate="";
-                movieListingAdapter.clearAll();
-                currentPage = 1;
-                loadDataFromApi();
+                if(lteReleaseDate.length() > 0 || gteReleaseDate.length() > 0){
+                    lteReleaseDate="";
+                    gteReleaseDate="";
+                    movieListingAdapter.clearAll();
+                    currentPage = 1;
+                    initRecyclerView();
+                    loadDataFromApi();
+                }
+
         }
 
     }
