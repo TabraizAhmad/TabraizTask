@@ -1,4 +1,4 @@
-package com.assignment.tasktabraiz.movielisting.view;
+package com.assignment.tasktabraiz.moviedetail.view;
 
 import android.os.Bundle;
 

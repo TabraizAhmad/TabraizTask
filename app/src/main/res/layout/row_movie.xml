@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <data>
-        <variable name="viewModel" type="com.assignment.tasktabraiz.movielisting.model.MovieData"/>
+        <variable name="viewModel" type="com.assignment.tasktabraiz.moviedetail.model.MovieData"/>
     </data>
 
     <RelativeLayout

@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".movielisting.view.MovieListingFragment">
+    tools:context=".moviedetail.view.MovieListingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <Button
+        android:id="@+id/btnFilter"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/filter"
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/margin_6dp"
+        android:layout_alignParentEnd="true" />
+    <Button
+        android:id="@+id/btnClearFilter"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_filter"
+        android:textStyle="bold"
+        android:layout_margin="@dimen/margin_6dp"
+        android:layout_toLeftOf="@+id/btnFilter"
+        android:layout_toStartOf="@+id/btnFilter" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/moviesList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/btnFilter"
+        />
 
-</FrameLayout>
+</RelativeLayout>

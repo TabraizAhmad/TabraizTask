@@ -3,7 +3,7 @@ package com.assignment.tasktabraiz.application;
 import android.app.Application;
 import android.content.Context;
 
-import com.assignment.tasktabraiz.movielisting.repository.MoviesRepository;
+import com.assignment.tasktabraiz.moviedetail.repository.MoviesRepository;
 import com.assignment.tasktabraiz.network.RetrofitHelper;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;

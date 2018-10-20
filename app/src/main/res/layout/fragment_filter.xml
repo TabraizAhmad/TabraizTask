@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <data>
+        <variable name="viewModel" type="com.assignment.tasktabraiz.moviedetail.model.FilterModel"/>
+    </data>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvReleaseDateGTE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/released_after"
+            android:labelFor="@+id/etReleaseDateGTE"
+
+            />
+
+        <EditText
+            android:id="@+id/etReleaseDateGTE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:focusable="false"
+            android:layout_below="@+id/tvReleaseDateGTE"
+            android:text="@={viewModel.releaseAfterDate}"
+
+            />
+
+
+        <TextView
+            android:id="@+id/tvReleaseDateLTE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/etReleaseDateLTE"
+            android:text="@string/release_before"
+            android:layout_below="@+id/etReleaseDateGTE"
+            />
+
+        <EditText
+            android:id="@+id/etReleaseDateLTE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:focusable="false"
+            android:layout_below="@+id/tvReleaseDateLTE"
+            android:text="@={viewModel.releaseBeforeDate}"
+
+            />
+
+        <Button
+            android:id="@+id/btnApply"
+            style="?android:textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apply"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/margin_6dp"
+            android:layout_below="@+id/etReleaseDateLTE"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+</layout>

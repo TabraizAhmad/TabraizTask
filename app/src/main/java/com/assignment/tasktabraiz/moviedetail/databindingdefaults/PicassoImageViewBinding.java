@@ -1,4 +1,4 @@
-package com.assignment.tasktabraiz.movielisting.databindingdefaults;
+package com.assignment.tasktabraiz.moviedetail.databindingdefaults;
 
 import android.widget.ImageView;
 

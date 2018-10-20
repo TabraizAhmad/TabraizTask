@@ -1,4 +1,4 @@
-package com.assignment.tasktabraiz.movielisting.repository;
+package com.assignment.tasktabraiz.moviedetail.repository;
 
 
 
@@ -7,7 +7,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.assignment.tasktabraiz.base.model.BaseResponse;
-import com.assignment.tasktabraiz.movielisting.model.MovieData;
+import com.assignment.tasktabraiz.moviedetail.model.MovieData;
 import com.assignment.tasktabraiz.network.WebService;
 
 import java.util.List;
@@ -26,9 +26,9 @@ public class MoviesRepository {
         this.webService = webService;
     }
 
-    public LiveData<BaseResponse< List<MovieData> >> discoverMovies(Integer pageNumber) {
+    public LiveData<BaseResponse< List<MovieData> >> discoverMovies(Integer pageNumber,String lteReleaseDate,String gteReleaseDate) {
         final MutableLiveData<BaseResponse<List<MovieData>>> data = new MutableLiveData<>();
-        Call<BaseResponse <List<MovieData>>> movielistCall = webService.discoverMovies(pageNumber);
+        Call<BaseResponse <List<MovieData>>> movielistCall = webService.discoverMovies(pageNumber,lteReleaseDate,gteReleaseDate);
         movielistCall.enqueue(new Callback<BaseResponse<List<MovieData>>>() {
             @Override
             public void onResponse(@NonNull Call<BaseResponse<List<MovieData>>> call, @NonNull Response<BaseResponse<List<MovieData>>> response) {

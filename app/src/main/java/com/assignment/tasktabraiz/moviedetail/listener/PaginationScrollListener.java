@@ -1,4 +1,4 @@
-package com.assignment.tasktabraiz.movielisting.listener;
+package com.assignment.tasktabraiz.moviedetail.listener;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

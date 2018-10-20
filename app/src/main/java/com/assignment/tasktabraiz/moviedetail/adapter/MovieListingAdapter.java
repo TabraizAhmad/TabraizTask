@@ -1,4 +1,4 @@
-package com.assignment.tasktabraiz.movielisting.adapter;
+package com.assignment.tasktabraiz.moviedetail.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import com.assignment.tasktabraiz.R;
 import com.assignment.tasktabraiz.databinding.RowMovieBinding;
-import com.assignment.tasktabraiz.movielisting.model.MovieData;
-import com.assignment.tasktabraiz.movielisting.databindingdefaults.DefaultDataBindingComponent;
+import com.assignment.tasktabraiz.moviedetail.model.MovieData;
+import com.assignment.tasktabraiz.moviedetail.databindingdefaults.DefaultDataBindingComponent;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -94,6 +94,10 @@ public class MovieListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         for (MovieData data : moveResults) {
             add(data);
         }
+    }
+
+    public void clearAll() {
+        movieDataList.clear();
     }
 
     public void removeLoadingFooter() {

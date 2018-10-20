@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".application.TaskApplication">
-        <activity android:name=".movielisting.view.MovieListingActivity">
+        <activity android:name=".moviedetail.view.MovieListingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
