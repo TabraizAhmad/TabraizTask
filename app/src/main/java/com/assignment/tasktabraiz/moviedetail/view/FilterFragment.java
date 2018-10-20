@@ -4,14 +4,10 @@ import android.app.DatePickerDialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 
 import com.assignment.tasktabraiz.R;
 import com.assignment.tasktabraiz.base.view.BaseFragment;
@@ -28,11 +24,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     public static final String ARG_BEFORE = "beforeDate";
     public static final String ARG_AFTER = "afterDate";
 
-    EditText etReleaseDateLTE;
-    EditText etReleaseDateGTE;
 
-    Button btnApply;
-    Button btnClearFilter;
 
     String releaseBeforeDate;
     String releaseAfterDate;
@@ -77,24 +69,23 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
             filterModel.setReleaseAfterDate(releaseAfterDate);
         }
 
-        FragmentFilterBinding fragmentFilterBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_filter,container,false);
+        FragmentFilterBinding fragmentFilterBinding = DataBindingUtil.inflate(
+                inflater,R.layout.fragment_filter,
+                container,false);
+
         fragmentFilterBinding.setViewModel(filterModel);
         View view = fragmentFilterBinding.getRoot();
 
-        etReleaseDateLTE = view.findViewById(R.id.etReleaseDateLTE);
-        etReleaseDateGTE = view.findViewById(R.id.etReleaseDateGTE);
-        btnApply = view.findViewById(R.id.btnApply);
-        btnClearFilter = view.findViewById(R.id.btnClearFilter);
-
-        btnClearFilter.setOnClickListener(this);
-        etReleaseDateLTE.setOnClickListener(this);
-        etReleaseDateGTE.setOnClickListener(this);
-        btnApply.setOnClickListener(this);
+        view.findViewById(R.id.etReleaseDateLTE).setOnClickListener(this);
+        view.findViewById(R.id.etReleaseDateGTE).setOnClickListener(this);
+        view.findViewById(R.id.btnApply).setOnClickListener(this);
+        view.findViewById(R.id.btnClearFilter).setOnClickListener(this);
 
         return view;
     }
 
-    final DatePickerDialog.OnDateSetListener onBeforeDateSetListener = new DatePickerDialog.OnDateSetListener() {
+    final DatePickerDialog.OnDateSetListener onBeforeDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
 
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -109,7 +100,8 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     };
 
 
-    DatePickerDialog.OnDateSetListener onAfterDateSetListener = new DatePickerDialog.OnDateSetListener() {
+    DatePickerDialog.OnDateSetListener onAfterDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
 
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -123,13 +115,15 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
 
     };
     void showBeforeDateDialog(){
-        new DatePickerDialog(Objects.requireNonNull(getContext()), onBeforeDateSetListener, dateCalendar
+        new DatePickerDialog(Objects.requireNonNull(getContext()),
+                onBeforeDateSetListener, dateCalendar
                 .get(Calendar.YEAR), dateCalendar.get(Calendar.MONTH),
                 dateCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     void showAfterDateDialog(){
-        new DatePickerDialog(Objects.requireNonNull(getContext()), onAfterDateSetListener, dateCalendar
+        new DatePickerDialog(Objects.requireNonNull(getContext()),
+                onAfterDateSetListener, dateCalendar
                 .get(Calendar.YEAR), dateCalendar.get(Calendar.MONTH),
                 dateCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
@@ -155,12 +149,9 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
 
     private void openListingFragment() {
 
-        MovieListingFragment movieListingFragment = MovieListingFragment.newInstance(filterModel.getReleaseBeforeDate(), filterModel.getReleaseAfterDate());
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, movieListingFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        MovieListingFragment movieListingFragment = MovieListingFragment.newInstance(
+                filterModel.getReleaseBeforeDate(), filterModel.getReleaseAfterDate());
+        fragmentTrasition(movieListingFragment);
 
     }
 

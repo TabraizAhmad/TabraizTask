@@ -5,14 +5,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.assignment.tasktabraiz.R;
 import com.assignment.tasktabraiz.base.view.BaseFragment;
@@ -21,6 +19,7 @@ import com.assignment.tasktabraiz.moviedetail.listener.PaginationScrollListener;
 import com.assignment.tasktabraiz.moviedetail.listener.RecyclerItemClickListener;
 import com.assignment.tasktabraiz.moviedetail.model.MovieData;
 import com.assignment.tasktabraiz.moviedetail.viewmodel.MoviesViewModel;
+import com.assignment.tasktabraiz.network.util.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +27,6 @@ import java.util.List;
 public class MovieListingFragment extends BaseFragment implements View.OnClickListener{
 
     private RecyclerView moviesListRecyclerView;
-
-    private Button btnFilter;
 
     private MovieListingAdapter movieListingAdapter;
 
@@ -77,8 +74,12 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_movie_listing, container, false);
         moviesListRecyclerView = view.findViewById(R.id.moviesList);
-        btnFilter = view.findViewById(R.id.btnFilter);
-        btnFilter.setOnClickListener(this);
+        progressBar = view.findViewById(R.id.progressBar);
+        offlineContainer = view.findViewById(R.id.layoutOffline);
+
+        view.findViewById(R.id.btnFilter).setOnClickListener(this);
+        view.findViewById(R.id.btnTryAgain).setOnClickListener(this);
+
         currentPage = PAGE_START;
         if (getArguments() != null) {
             lteReleaseDate = getArguments().getString(ARG_BEFORE);
@@ -100,7 +101,20 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
     private void loadDataFromApi() {
         Context context = getContext();
         if (context == null) return;
-        loadNextPage();
+        if (NetworkUtils.isNetworkAvailable(context)) {
+            showHideOfflineLayout(false);
+            loadNextPage();
+        } else {
+            showHideOfflineLayout(true);
+            hideView(progressBar);
+        }
+    }
+
+
+    private void showHideOfflineLayout(boolean isOffline) {
+        offlineContainer.setVisibility(isOffline ? View.VISIBLE : View.GONE);
+        moviesListRecyclerView.setVisibility(isOffline ? View.GONE : View.VISIBLE);
+        progressBar.setVisibility(isOffline ? View.GONE : View.VISIBLE);
     }
 
 
@@ -109,8 +123,10 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
                 .observe(this, response -> {
                     if (response != null) {
                         List<MovieData> movieDataList = response.getResults();
+
                         movieListingAdapter.removeLoadingFooter();
                         isLoading = false;
+                        hideView(progressBar);
 
                         movieListingAdapter.addAll( movieDataList );
                         TOTAL_PAGES = response.getTotalPages();
@@ -130,7 +146,8 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
             moviesListRecyclerView.setItemAnimator(new DefaultItemAnimator());
             movieListingAdapter.setItems(movieDataArrayList);
             moviesListRecyclerView.setAdapter(movieListingAdapter);
-            moviesListRecyclerView.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
+            moviesListRecyclerView.addOnScrollListener(
+                    new PaginationScrollListener(linearLayoutManager) {
                 @Override
                 protected void loadMoreItems() {
                     isLoading = true;
@@ -155,7 +172,8 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
             });
 
             moviesListRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
-                    getActivity(), moviesListRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    getActivity(), moviesListRecyclerView, new
+                    RecyclerItemClickListener.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
                     if(movieDataArrayList.get(position) != null){
@@ -183,11 +201,12 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
             case R.id.btnFilter:
                 openFilterFragment();
                 break;
-
+            case R.id.btnTryAgain:
+                loadDataFromApi();
+                break;
         }
 
     }
-
 
     private void openFilterFragment() {
         FilterFragment filterFragment = FilterFragment.newInstance(lteReleaseDate,gteReleaseDate);

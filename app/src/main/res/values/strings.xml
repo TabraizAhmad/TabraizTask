@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">TaskTabraiz</string>
-    <string name="tmdb_debug_api_key">2407c5b64dcc861154b74d67cab3450c</string>
     <string name="movie_poster">movie poster</string>
     <string name="filter">Filter</string>
     <string name="release_before">Release on or before</string>
     <string name="released_after">Released on or after</string>
     <string name="apply">Apply</string>
     <string name="clear_filter">Clear filter</string>
+    <string name="network_error">Network Error, check your connection and try again</string>
+    <string name="try_again">Try again</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
