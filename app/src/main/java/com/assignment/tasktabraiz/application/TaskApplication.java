@@ -3,27 +3,29 @@ package com.assignment.tasktabraiz.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.assignment.tasktabraiz.di.applicationDI.component.DaggerTaskApplicationCompenent;
+import com.assignment.tasktabraiz.di.applicationDI.component.TaskApplicationCompenent;
+import com.assignment.tasktabraiz.di.applicationDI.module.ContextModule;
 import com.assignment.tasktabraiz.moviedetail.repository.MoviesRepository;
-import com.assignment.tasktabraiz.network.RetrofitHelper;
-import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
-import okhttp3.OkHttpClient;
-
 public class TaskApplication extends Application {
+
     private MoviesRepository moviesRepository;
+
     private Picasso picasso;
-    private RetrofitHelper retrofitHelper;
+    private TaskApplicationCompenent daggerApplicationCompenent;
+
+
     @Override
     public void onCreate() {
         super.onCreate();
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+
+        daggerApplicationCompenent = DaggerTaskApplicationCompenent.builder()
+                .contextModule(new ContextModule(this))
                 .build();
-        picasso = new Picasso.Builder(this)
-                .downloader(new OkHttp3Downloader(okHttpClient))
-                .build();
-        retrofitHelper = new RetrofitHelper();
-        moviesRepository = new MoviesRepository(retrofitHelper.getWebService());
+        picasso = daggerApplicationCompenent.getPicasso();
+        moviesRepository = daggerApplicationCompenent.getMoviesRepository();
     }
 
     public static TaskApplication get(Context context){
@@ -36,5 +38,10 @@ public class TaskApplication extends Application {
 
     public MoviesRepository getMoviesRepository() {
         return moviesRepository;
+    }
+
+
+    public TaskApplicationCompenent getDaggerApplicationCompenent() {
+        return daggerApplicationCompenent;
     }
 }
