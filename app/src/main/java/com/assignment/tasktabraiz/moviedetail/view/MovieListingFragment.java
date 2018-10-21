@@ -13,7 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.assignment.tasktabraiz.R;
+import com.assignment.tasktabraiz.application.TaskApplication;
 import com.assignment.tasktabraiz.base.view.BaseFragment;
+import com.assignment.tasktabraiz.di.moviedetailDI.component.DaggerMovieListingFragmentComponent;
+import com.assignment.tasktabraiz.di.moviedetailDI.component.MovieListingFragmentComponent;
 import com.assignment.tasktabraiz.moviedetail.adapter.MovieListingAdapter;
 import com.assignment.tasktabraiz.moviedetail.listener.PaginationScrollListener;
 import com.assignment.tasktabraiz.moviedetail.listener.RecyclerItemClickListener;
@@ -23,12 +26,16 @@ import com.assignment.tasktabraiz.network.util.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import javax.inject.Inject;
 
 public class MovieListingFragment extends BaseFragment implements View.OnClickListener{
 
     private RecyclerView moviesListRecyclerView;
 
-    private MovieListingAdapter movieListingAdapter;
+    @Inject
+    MovieListingAdapter movieListingAdapter;
 
     private int TOTAL_PAGES = 1;
     private int currentPage = PAGE_START;
@@ -92,7 +99,12 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        MovieListingFragmentComponent component = DaggerMovieListingFragmentComponent.builder()
+                .taskApplicationCompenent(TaskApplication.get(
+                        Objects.requireNonNull(
+                                getActivity())).getDaggerApplicationCompenent())
+                .build();
+        component.injectMovieListingFragment(this);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
         initRecyclerView();
         loadDataFromApi();
@@ -139,7 +151,6 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
     }
 
     private void initRecyclerView() {
-            movieListingAdapter = new MovieListingAdapter( moviesViewModel.getPicasso() );
             List<MovieData> movieDataArrayList = new ArrayList<>();
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             moviesListRecyclerView.setLayoutManager(linearLayoutManager);

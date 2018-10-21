@@ -12,12 +12,15 @@ import android.widget.DatePicker;
 import com.assignment.tasktabraiz.R;
 import com.assignment.tasktabraiz.base.view.BaseFragment;
 import com.assignment.tasktabraiz.databinding.FragmentFilterBinding;
+import com.assignment.tasktabraiz.di.moviedetailDI.component.DaggerFilterFragmentComponent;
+import com.assignment.tasktabraiz.di.moviedetailDI.component.FilterFragmentComponent;
 import com.assignment.tasktabraiz.moviedetail.model.FilterModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.Objects;
+
+import javax.inject.Inject;
 
 public class FilterFragment extends BaseFragment implements View.OnClickListener {
 
@@ -28,12 +31,15 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
 
     String releaseBeforeDate;
     String releaseAfterDate;
-    String myFormat = "yyyy-MM-dd";
 
+    @Inject
     Calendar dateCalendar;
 
-    private FilterModel filterModel;
-    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+    @Inject
+    FilterModel filterModel;
+
+    @Inject
+    SimpleDateFormat sdf;
 
     public FilterFragment() {
         // Required empty public constructor
@@ -52,7 +58,6 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dateCalendar = Calendar.getInstance();
 
     }
 
@@ -61,7 +66,8 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        filterModel = new FilterModel();
+        FilterFragmentComponent component = DaggerFilterFragmentComponent.builder().build();
+        component.injectFilterFragmentComponent(this);
         if (getArguments() != null) {
             releaseBeforeDate = getArguments().getString(ARG_BEFORE);
             releaseAfterDate = getArguments().getString(ARG_AFTER);

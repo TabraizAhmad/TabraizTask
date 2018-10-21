@@ -17,7 +17,6 @@ import java.util.List;
 public class MoviesViewModel extends AndroidViewModel {
 
     private MoviesRepository moviesRepository;
-    private Picasso picasso;
 
     private LiveData<BaseResponse<List<MovieData>>> moviesList;
 
@@ -25,7 +24,7 @@ public class MoviesViewModel extends AndroidViewModel {
     public MoviesViewModel(@NonNull Application application) {
         super(application);
         moviesRepository = TaskApplication.get(this.getApplication()).getMoviesRepository();
-        picasso = TaskApplication.get(this.getApplication()).getPicasso();
+
     }
 
 
@@ -36,10 +35,6 @@ public class MoviesViewModel extends AndroidViewModel {
 
     public LiveData<BaseResponse<List<MovieData>>> getMoviesList() {
         return moviesList;
-    }
-
-    public Picasso getPicasso() {
-        return picasso;
     }
 
 }
