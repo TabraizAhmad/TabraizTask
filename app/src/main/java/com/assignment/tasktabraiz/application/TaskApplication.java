@@ -9,11 +9,15 @@ import com.assignment.tasktabraiz.di.applicationDI.module.ContextModule;
 import com.assignment.tasktabraiz.moviedetail.repository.MoviesRepository;
 import com.squareup.picasso.Picasso;
 
+import javax.inject.Inject;
+
 public class TaskApplication extends Application {
 
-    private MoviesRepository moviesRepository;
+    @Inject
+    MoviesRepository moviesRepository;
 
-    private Picasso picasso;
+    Picasso picasso;
+
     private TaskApplicationCompenent daggerApplicationCompenent;
 
 
@@ -24,8 +28,10 @@ public class TaskApplication extends Application {
         daggerApplicationCompenent = DaggerTaskApplicationCompenent.builder()
                 .contextModule(new ContextModule(this))
                 .build();
+
+        daggerApplicationCompenent.injectTaskApplicationCompenent(this);
+
         picasso = daggerApplicationCompenent.getPicasso();
-        moviesRepository = daggerApplicationCompenent.getMoviesRepository();
     }
 
     public static TaskApplication get(Context context){
