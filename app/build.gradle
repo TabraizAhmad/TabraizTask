@@ -8,7 +8,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.assignment.tasktabraiz.MockTestRunner"
     }
     buildTypes {
 
@@ -76,4 +76,6 @@ dependencies {
 
     androidTestImplementation "com.android.support.test:runner:$TEST_RUNNER_VERSION/"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+
 }

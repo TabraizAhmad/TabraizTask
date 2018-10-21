@@ -13,24 +13,17 @@ import javax.inject.Inject;
 
 public class TaskApplication extends Application {
 
-    @Inject
     MoviesRepository moviesRepository;
 
     Picasso picasso;
 
     private TaskApplicationCompenent daggerApplicationCompenent;
 
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
+    public void createComponent(){
         daggerApplicationCompenent = DaggerTaskApplicationCompenent.builder()
                 .contextModule(new ContextModule(this))
                 .build();
-
-        daggerApplicationCompenent.injectTaskApplicationCompenent(this);
-
+        moviesRepository = daggerApplicationCompenent.getMoviesRepository();
         picasso = daggerApplicationCompenent.getPicasso();
     }
 

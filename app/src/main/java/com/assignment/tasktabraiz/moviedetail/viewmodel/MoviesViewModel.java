@@ -23,7 +23,7 @@ public class MoviesViewModel extends AndroidViewModel {
 
     public MoviesViewModel(@NonNull Application application) {
         super(application);
-        moviesRepository = TaskApplication.get(this.getApplication()).getMoviesRepository();
+        moviesRepository = ((TaskApplication)application).getMoviesRepository();
 
     }
 

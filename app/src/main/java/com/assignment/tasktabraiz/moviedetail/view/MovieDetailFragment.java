@@ -67,9 +67,9 @@ public class MovieDetailFragment extends BaseFragment implements View.OnClickLis
         movieDetailViewModel = ViewModelProviders.of(this).get(MovieDetailViewModel.class);
 
         MovieDetailFragmentComponent component = DaggerMovieDetailFragmentComponent.builder()
-                .taskApplicationCompenent(TaskApplication.get(
-                        Objects.requireNonNull(
-                                getActivity())).getDaggerApplicationCompenent())
+                .taskApplicationCompenent((
+                        (TaskApplication) Objects.requireNonNull(getActivity()).getApplication())
+                        .getDaggerApplicationCompenent())
                 .build();
         component.injectMovieDetailFragment(this);
 

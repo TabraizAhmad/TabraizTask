@@ -1,5 +1,6 @@
 package com.assignment.tasktabraiz.moviedetail.view;
 
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.LargeTest;
 
+import com.assignment.tasktabraiz.MockTaskApplication;
 import com.assignment.tasktabraiz.R;
 
 import org.junit.After;
@@ -39,9 +41,12 @@ public class HomeActivityTest extends InstrumentationTestCase {
     public void setUp() throws Exception {
         server = new MockWebServer();
         server.start();
-        injectInstrumentation(InstrumentationRegistry.getInstrumentation());
-        /*TestTaskApplicationCompenent compenent = DaggerTestTaskApplicationCompenent.builder().build();*/
         BASE_URL = server.url("/").toString();
+        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+        injectInsrumentation(instrumentation);
+        MockTaskApplication app
+                = (MockTaskApplication) instrumentation.getTargetContext().getApplicationContext();
+        app.createComponent();
     }
 
     @Test

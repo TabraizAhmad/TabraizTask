@@ -100,9 +100,9 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MovieListingFragmentComponent component = DaggerMovieListingFragmentComponent.builder()
-                .taskApplicationCompenent(TaskApplication.get(
-                        Objects.requireNonNull(
-                                getActivity())).getDaggerApplicationCompenent())
+                .taskApplicationCompenent(( (TaskApplication)(
+                        Objects.requireNonNull(getActivity()).getApplication()))
+                        .getDaggerApplicationCompenent())
                 .build();
         component.injectMovieListingFragment(this);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);

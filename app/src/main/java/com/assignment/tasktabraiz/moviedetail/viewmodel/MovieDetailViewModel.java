@@ -21,8 +21,9 @@ public class MovieDetailViewModel extends AndroidViewModel {
 
     public MovieDetailViewModel(@NonNull Application application) {
         super(application);
-        moviesRepository = TaskApplication.get(this.getApplication()).getMoviesRepository();
-        picasso = TaskApplication.get(this.getApplication()).getPicasso();
+
+        moviesRepository = ((TaskApplication)(getApplication())).getMoviesRepository();
+        picasso = ((TaskApplication)(getApplication())).getPicasso();
     }
 
 
