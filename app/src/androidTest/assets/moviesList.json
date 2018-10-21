@@ -1,0 +1,366 @@
+{
+    "page": 1,
+    "total_results": 233,
+    "total_pages": 12,
+    "results": [
+        {
+            "vote_count": 82,
+            "id": 424139,
+            "video": false,
+            "vote_average": 6.4,
+            "title": "Halloween",
+            "popularity": 111.754,
+            "poster_path": "/lNkDYKmrVem1J0aAfCnQlJOCKnT.jpg",
+            "original_language": "en",
+            "original_title": "Halloween",
+            "genre_ids": [
+                27
+            ],
+            "backdrop_path": "/hO1oTBGNxO5fBKVEuWnSpICJH7c.jpg",
+            "adult": false,
+            "overview": "Laurie Strode comes to her final confrontation with Michael Myers, the masked figure who has haunted her since she narrowly escaped his killing spree on Halloween night four decades ago.",
+            "release_date": "2018-10-18"
+        },
+        {
+            "vote_count": 3,
+            "id": 523873,
+            "video": false,
+            "vote_average": 3.5,
+            "title": "Kung Fu League",
+            "popularity": 62.079,
+            "poster_path": "/rW0A73hjzPWVwADlCTLnjLhAFLX.jpg",
+            "original_language": "zh",
+            "original_title": "功夫联盟",
+            "genre_ids": [
+                28,
+                35
+            ],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "Martial arts comedy following a group of kung fu legends banding together to take on the bad guys. The legends includes VINCENT ZHAO reprising his role as ‘Wong Fei Hung’ with DENNIS TO once again portraying ‘Wing Chun’ master ‘Ip Man’, DANNY CHAN KWOK KWAN as ‘Chen Zhen’ and ANDY ON as master ‘Huo Yuan Jia’.",
+            "release_date": "2018-10-19"
+        },
+        {
+            "vote_count": 4,
+            "id": 399402,
+            "video": false,
+            "vote_average": 5.5,
+            "title": "Hunter Killer",
+            "popularity": 33.217,
+            "poster_path": "/82eQFmaLjRv3othN6BV3Ac80Abh.jpg",
+            "original_language": "en",
+            "original_title": "Hunter Killer",
+            "genre_ids": [
+                28
+            ],
+            "backdrop_path": "/x63c33AYeuARAoRE9CL5Ik9yojk.jpg",
+            "adult": false,
+            "overview": "An untested American submarine captain teams with U.S. Navy Seals to rescue the Russian president, who has been kidnapped by a rogue general.",
+            "release_date": "2018-10-19"
+        },
+        {
+            "vote_count": 1,
+            "id": 463158,
+            "video": false,
+            "vote_average": 0,
+            "title": "My Dinner With Hervé",
+            "popularity": 26.664,
+            "poster_path": "/faY4f0XlxF3EMiJNJNuezCJv8uu.jpg",
+            "original_language": "en",
+            "original_title": "My Dinner With Hervé",
+            "genre_ids": [
+                18
+            ],
+            "backdrop_path": "/givyOg8mdy0aFCdENMn8FIVuS4o.jpg",
+            "adult": false,
+            "overview": "An unlikely friendship evolves over one wild night in LA between a struggling journalist and actor Hervé Villechaize, the world's most famous gun-tothing dwarf, resulting in life-changing consequences for both",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 15,
+            "id": 470044,
+            "video": false,
+            "vote_average": 8.6,
+            "title": "The Hate U Give",
+            "popularity": 25.758,
+            "poster_path": "/zfDN0YX1BNRsnCnp1mWOaiGeN9y.jpg",
+            "original_language": "en",
+            "original_title": "The Hate U Give",
+            "genre_ids": [
+                18,
+                80
+            ],
+            "backdrop_path": "/5AijK8OxcTzuT8z6aEcc3kO96eG.jpg",
+            "adult": false,
+            "overview": "Raised in a poverty-stricken slum, a 16-year-old girl named Starr now attends a suburban prep school. After she witnesses a police officer shoot her unarmed best friend, she's torn between her two very different worlds as she tries to speak her truth.",
+            "release_date": "2018-10-19"
+        },
+        {
+            "vote_count": 3,
+            "id": 437586,
+            "video": false,
+            "vote_average": 8,
+            "title": "Mid90s",
+            "popularity": 25.245,
+            "poster_path": "/lvB5TsUScfgwfjZYusjcuZ9L6oS.jpg",
+            "original_language": "en",
+            "original_title": "Mid90s",
+            "genre_ids": [
+                35,
+                18
+            ],
+            "backdrop_path": "/sI6I0KmAhJayJyADcnfCBY9Rud2.jpg",
+            "adult": false,
+            "overview": "Stevie is a sweet 13-year-old about to explode. His mom is loving and attentive, but a little too forthcoming about her romantic life. His big brother is a taciturn and violent bully. So Stevie searches his working-class Los Angeles suburb for somewhere to belong. He finds it at the Motor Avenue skate shop.",
+            "release_date": "2018-10-19"
+        },
+        {
+            "vote_count": 0,
+            "id": 508301,
+            "video": false,
+            "vote_average": 0,
+            "title": "Below the Trees",
+            "popularity": 24.339,
+            "poster_path": "/3ehmRPqy8id04YPtVyAquudkVlr.jpg",
+            "original_language": "en",
+            "original_title": "Below the Trees",
+            "genre_ids": [
+                18,
+                27,
+                9648
+            ],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "A young woman inherits her grandmother's rural estate but soon meets an unsettling neighbor with malevolent intentions.",
+            "release_date": "2018-10-21"
+        },
+        {
+            "vote_count": 0,
+            "id": 449924,
+            "video": false,
+            "vote_average": 0,
+            "title": "Ip Man 4",
+            "popularity": 22.476,
+            "poster_path": "/vn94LlNrbUWIZZyAdmvUepFBeaY.jpg",
+            "original_language": "zh",
+            "original_title": "Ip Man 4",
+            "genre_ids": [
+                28
+            ],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "Ip Man 4 is an upcoming Hong Kong biographical martial arts film directed by Wilson Yip and produced by Raymond Wong. It is the fourth in the Ip Man film series based on the life of the Wing Chun grandmaster of the same name and features Donnie Yen reprising the role. The film began production in April 2018 and ended in July the same year.",
+            "release_date": "2018-10-18"
+        },
+        {
+            "vote_count": 0,
+            "id": 551397,
+            "video": false,
+            "vote_average": 0,
+            "title": "Eleven Hundred to Lubbock",
+            "popularity": 22.133,
+            "poster_path": "/yR0ORXa9YcxkQHp93w7b2PGu3kx.jpg",
+            "original_language": "en",
+            "original_title": "Eleven Hundred to Lubbock",
+            "genre_ids": [
+                35
+            ],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "A group of unlikely friends pay tribute to their recently deceased loved one by relay-running his ashes across the country to their final stop: the grave of Buddy Holly.",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 0,
+            "id": 530180,
+            "video": false,
+            "vote_average": 0,
+            "title": "Reach",
+            "popularity": 21.955,
+            "poster_path": "/8FKYc0p9gJG6UKMlz2DnOGk741e.jpg",
+            "original_language": "en",
+            "original_title": "Reach",
+            "genre_ids": [
+                35,
+                18
+            ],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "A socially awkward band geek, Steven Turano, is planning on killing himself. However, when Clarence, the new quirky kid in school, befriends him, Steven's plans are sidetracked and he reaches beyond his comfort zone forming stronger relationships with his father, friends and teachers. The boys form an inseparable bond as Clarence finds creative ways to pull Steven out of his depression.",
+            "release_date": "2018-10-19"
+        },
+        {
+            "vote_count": 0,
+            "id": 547243,
+            "video": false,
+            "vote_average": 0,
+            "title": "Love, Of Course",
+            "popularity": 21.575,
+            "poster_path": "/jojmkJH55cTNlMn74II4DVpD6xt.jpg",
+            "original_language": "en",
+            "original_title": "Love, Of Course",
+            "genre_ids": [],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "In this star-studded movie featuring Olympian Gabby Douglas, Kelly Rutherford, and Cameron Mathison, Amy, a helicopter mom, will be forced to rethink her life when she takes a job at her daughter's college and falls in love with one of the professors who works there.",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 0,
+            "id": 551163,
+            "video": false,
+            "vote_average": 0,
+            "title": "The First Patient",
+            "popularity": 21.532,
+            "poster_path": "/jcEAtxSs9dAgFrLt5kNkDkR1bxT.jpg",
+            "original_language": "en",
+            "original_title": "The First Patient",
+            "genre_ids": [],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "A dramatic expedition into an unknown world, THE FIRST PATIENT challenges audiences to embrace their curiosity and courage as they follow first year medical students through gross anatomy - the dissection of the human body.",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 0,
+            "id": 548930,
+            "video": false,
+            "vote_average": 0,
+            "title": "Gokko",
+            "popularity": 21.261,
+            "poster_path": "/90uOhf6Aopj56en2cuJeCH1K5VT.jpg",
+            "original_language": "ja",
+            "original_title": "ごっこ",
+            "genre_ids": [
+                9648
+            ],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "A 40-years-old unemployed dad is one day visited by a childhood friend,who is now a police officer. She look at his 5 year old daughter with suspicion",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 0,
+            "id": 545564,
+            "video": false,
+            "vote_average": 0,
+            "title": "This Teacher",
+            "popularity": 21.227,
+            "poster_path": null,
+            "original_language": "en",
+            "original_title": "This Teacher",
+            "genre_ids": [
+                18
+            ],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "A reunion between two childhood friends goes awry in this disquieting portrait of a young Muslim woman visiting New York for the first time.",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 0,
+            "id": 512526,
+            "video": false,
+            "vote_average": 0,
+            "title": "At Last",
+            "popularity": 21.133,
+            "poster_path": null,
+            "original_language": "en",
+            "original_title": "At Last",
+            "genre_ids": [
+                28,
+                35
+            ],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "When a busy Beijing couple struggling with their relationship decide to holiday in Australia and focus on conceiving a baby, they suddenly find themselves caught in the middle of a complex art heist, leading them on a dangerous yet hilarious journey.",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 0,
+            "id": 543703,
+            "video": false,
+            "vote_average": 0,
+            "title": "Samson et Dalila - Met Opera Live",
+            "popularity": 21.119,
+            "poster_path": "/p96jkLC4bHxMc6QjKCaGbK3p1wg.jpg",
+            "original_language": "en",
+            "original_title": "Samson et Dalila - Met Opera Live",
+            "genre_ids": [
+                18
+            ],
+            "backdrop_path": "/kLz7AbLnYABrOq3u3t7sNIWCfsu.jpg",
+            "adult": false,
+            "overview": "When mezzo-soprano Elīna Garanča and tenor Roberto Alagna joined forces for a new production of Carmen at the Met, the results were electrifying. Now this star duo reunites for another sensual French opera when they open the season in the title roles of Saint-Saëns’s biblical epic Samson et Dalila. Darko Tresnjak, who won a Tony Award for Best Direction of a Musical in 2014 for A Gentleman’s Guide to Love & Murder, makes his Met debut directing a vivid, seductive staging, featuring a monumental setting for the last-act Temple of Dagon, where the hero crushes his Philistine enemies. Sir Mark Elder conducts the first new Met production of the work in 20 years.",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 0,
+            "id": 550245,
+            "video": false,
+            "vote_average": 0,
+            "title": "The Greek Connection",
+            "popularity": 21.117,
+            "poster_path": "/ucgraFkXPMPb50WSFmIqFOtCstp.jpg",
+            "original_language": "en",
+            "original_title": "The Greek Connection",
+            "genre_ids": [
+                9648
+            ],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "A hobby astronomer with an inexplicable fascination for the dwarf planet Pluto comes across a mystery at night.",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 0,
+            "id": 551158,
+            "video": false,
+            "vote_average": 0,
+            "title": "16 Bars",
+            "popularity": 21.083,
+            "poster_path": null,
+            "original_language": "en",
+            "original_title": "16 Bars",
+            "genre_ids": [],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "Todd \"Speech\" Thomas, a member of the iconic hip-hop group Arrested Development, spends 10 days working as part of a unique rehabilitation program in Richmond, VA, working to allow prisoners to write and record their own songs.",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 0,
+            "id": 551395,
+            "video": false,
+            "vote_average": 0,
+            "title": "The Maestro",
+            "popularity": 20.869,
+            "poster_path": null,
+            "original_language": "en",
+            "original_title": "The Maestro",
+            "genre_ids": [],
+            "backdrop_path": null,
+            "adult": false,
+            "overview": "After the Second World War, budding film composer Jerry Herst moves to Hollywood to study with infamous master teacher Mario Castelnuovo-Tedesco.",
+            "release_date": "2018-10-20"
+        },
+        {
+            "vote_count": 0,
+            "id": 553312,
+            "video": false,
+            "vote_average": 0,
+            "title": "Crossword",
+            "popularity": 20.839,
+            "poster_path": "/3iWvgpLXzhiL1slGvLxRV2zRQAu.jpg",
+            "original_language": "ru",
+            "original_title": "Кроссворд",
+            "genre_ids": [
+                99
+            ],
+            "backdrop_path": "/gecZXGr24toN2XhhXlkILwsiE6m.jpg",
+            "adult": false,
+            "overview": "Igor is almost a grown man. Together with his retired mother he spends summer days out in the country, endlessly doing crossword puzzles. But can he really have rest while neighbours’ hens are wandering around the yard, some nasty insects are buzzing in the bushes nearby, and his mother is struggling with a six-letter word?",
+            "release_date": "2018-10-20"
+        }
+    ]
+}
