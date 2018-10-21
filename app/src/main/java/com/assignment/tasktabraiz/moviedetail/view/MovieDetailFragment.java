@@ -110,6 +110,7 @@ public class MovieDetailFragment extends BaseFragment implements View.OnClickLis
         movieDetailViewModel.fetchMovieDetail(movieId).observe(this,response ->{
             if (response != null) {
                 movieDetail = response;
+                movieDetailLayout.setVisibility(View.VISIBLE);
                 hideView(progressBar);
                     ((FragmentMovieDetailBinding) fragmentMovieDetailBinding).setViewModel(movieDetail);
             }else {
@@ -121,7 +122,7 @@ public class MovieDetailFragment extends BaseFragment implements View.OnClickLis
     private void showHideOfflineLayout(boolean isOffline) {
         offlineContainer.setVisibility(isOffline ? View.VISIBLE : View.GONE);
         progressBar.setVisibility(isOffline ? View.GONE : View.VISIBLE);
-        movieDetailLayout.setVisibility(isOffline ? View.GONE : View.VISIBLE);
+
     }
 
 

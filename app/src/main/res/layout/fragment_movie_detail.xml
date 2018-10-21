@@ -103,15 +103,16 @@
                 android:layout_toRightOf="@+id/labelBudget"
                 android:layout_toEndOf="@+id/labelBudget" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_centerInParent="true" />
 
         </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerInParent="true" />
         <include
             android:layout_centerInParent="true"
             layout="@layout/layout_offline"
