@@ -13,12 +13,20 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.assignment.tasktabraiz.R;
+import com.assignment.tasktabraiz.application.TaskApplication;
 import com.assignment.tasktabraiz.base.view.BaseFragment;
 import com.assignment.tasktabraiz.databinding.FragmentMovieDetailBinding;
+import com.assignment.tasktabraiz.di.moviedetailDI.component.DaggerMovieDetailFragmentComponent;
+import com.assignment.tasktabraiz.di.moviedetailDI.component.MovieDetailFragmentComponent;
 import com.assignment.tasktabraiz.moviedetail.databindingdefaults.DefaultDataBindingComponent;
 import com.assignment.tasktabraiz.moviedetail.model.MovieDetail;
 import com.assignment.tasktabraiz.moviedetail.viewmodel.MovieDetailViewModel;
 import com.assignment.tasktabraiz.network.util.NetworkUtils;
+import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
+
+import javax.inject.Inject;
 
 public class MovieDetailFragment extends BaseFragment implements View.OnClickListener {
     private static final String ARG_MOVIE_ID = "movieId";
@@ -28,6 +36,10 @@ public class MovieDetailFragment extends BaseFragment implements View.OnClickLis
     private RelativeLayout movieDetailLayout;
     private MovieDetail movieDetail;
     private ViewDataBinding fragmentMovieDetailBinding;
+
+    @Inject
+    Picasso picasso;
+
     public MovieDetailFragment() {
         // Required empty public constructor
     }
@@ -54,10 +66,17 @@ public class MovieDetailFragment extends BaseFragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         movieDetailViewModel = ViewModelProviders.of(this).get(MovieDetailViewModel.class);
 
+        MovieDetailFragmentComponent component = DaggerMovieDetailFragmentComponent.builder()
+                .taskApplicationCompenent(TaskApplication.get(
+                        Objects.requireNonNull(
+                                getActivity())).getDaggerApplicationCompenent())
+                .build();
+        component.injectMovieDetailFragment(this);
+
         fragmentMovieDetailBinding = DataBindingUtil.inflate(
                 inflater,R.layout.fragment_movie_detail,
                 container,false,
-                new DefaultDataBindingComponent(movieDetailViewModel.getPicasso()));
+                new DefaultDataBindingComponent(picasso));
         View view = fragmentMovieDetailBinding.getRoot();
 
         progressBar = view.findViewById(R.id.progressBar);
