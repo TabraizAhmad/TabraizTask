@@ -14,6 +14,7 @@
             android:layout_height="match_parent"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:padding="@dimen/padding_8dp"
+            android:visibility="gone"
             >
 
             <ImageView
@@ -111,7 +112,11 @@
                 android:layout_centerInParent="true" />
 
         </RelativeLayout>
-        <include layout="@layout/layout_offline" />
+        <include
+            android:layout_centerInParent="true"
+            layout="@layout/layout_offline"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
 
     </RelativeLayout>
 </layout>

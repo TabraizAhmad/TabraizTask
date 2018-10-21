@@ -111,9 +111,9 @@ public class MovieDetailFragment extends BaseFragment implements View.OnClickLis
             if (response != null) {
                 movieDetail = response;
                 hideView(progressBar);
-                if(movieDetail != null){
                     ((FragmentMovieDetailBinding) fragmentMovieDetailBinding).setViewModel(movieDetail);
-                }
+            }else {
+                showHideOfflineLayout(true);
             }
         });
     }

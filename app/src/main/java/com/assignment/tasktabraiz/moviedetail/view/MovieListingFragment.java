@@ -146,6 +146,8 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
                         if (currentPage <= TOTAL_PAGES && movieDataList.size() > 1)
                             movieListingAdapter.addLoadingFooter();
                         else isLastPage = true;
+                    }else{
+                        showHideOfflineLayout(true);
                     }
                 });
     }
