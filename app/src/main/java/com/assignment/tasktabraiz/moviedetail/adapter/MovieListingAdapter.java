@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import com.assignment.tasktabraiz.R;
 import com.assignment.tasktabraiz.databinding.RowMovieBinding;
-import com.assignment.tasktabraiz.moviedetail.model.MovieData;
 import com.assignment.tasktabraiz.moviedetail.databindingdefaults.DefaultDataBindingComponent;
+import com.assignment.tasktabraiz.moviedetail.model.MovieData;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -78,6 +78,17 @@ public class MovieListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public int getItemViewType(int position) {
         return (position == movieDataList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
     }
+
+    @Override
+    public long getItemId(int position) {
+        if (movieDataList != null && movieDataList.size() >= position) {
+            return movieDataList.get(position).getId();
+        } else {
+            return -1;
+        }
+    }
+
+
     public void setItems(List<MovieData> movieDataArrayList) {
         movieDataList = movieDataArrayList;
         notifyDataSetChanged();
@@ -97,10 +108,6 @@ public class MovieListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         for (MovieData data : moveResults) {
             add(data);
         }
-    }
-
-    public void clearAll() {
-        movieDataList.clear();
     }
 
     public void removeLoadingFooter() {
