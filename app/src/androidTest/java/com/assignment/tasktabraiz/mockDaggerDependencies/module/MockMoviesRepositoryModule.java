@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.assignment.tasktabraiz.moviedetail.view.HomeActivityTest.BASE_URL;
+import static com.assignment.tasktabraiz.HomeActivityTest.BASE_URL;
 
 
 @Module
