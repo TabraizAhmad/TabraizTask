@@ -1,6 +1,9 @@
 package com.assignment.tasktabraiz.util;
 
 
+import android.arch.lifecycle.MutableLiveData;
+
+import com.assignment.tasktabraiz.base.model.BaseResponse;
 import com.assignment.tasktabraiz.moviedetail.adapter.MovieListingAdapter;
 import com.assignment.tasktabraiz.moviedetail.model.MovieData;
 import com.squareup.picasso.Picasso;
@@ -39,6 +42,18 @@ public class MockModelsUtil {
         }
 
         return movies;
+    }
+
+    public static MutableLiveData<BaseResponse<List<MovieData>>> createMockMoviesWithIdResponse(List<Integer> ids) {
+        List<MovieData> movies = createMockMoviesWithId(ids);
+        MutableLiveData<BaseResponse<List<MovieData>>> data = new MutableLiveData<>();
+        BaseResponse<List<MovieData>> baseResponse = new BaseResponse<>();
+        baseResponse.setPage(1);
+        baseResponse.setTotalPages(12);
+        baseResponse.setTotalResults(123);
+        baseResponse.setResults(movies);
+        data.setValue(baseResponse);
+        return data;
     }
 
     public static List<Integer> createMockMovieIdList(int count) {
