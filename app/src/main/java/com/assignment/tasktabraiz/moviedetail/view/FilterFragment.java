@@ -27,8 +27,6 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     public static final String ARG_BEFORE = "beforeDate";
     public static final String ARG_AFTER = "afterDate";
 
-
-
     String releaseBeforeDate;
     String releaseAfterDate;
 
@@ -54,88 +52,85 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
         return fragment;
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         FilterFragmentComponent component = DaggerFilterFragmentComponent.builder().build();
         component.injectFilterFragmentComponent(this);
-        if (getArguments() != null) {
-            releaseBeforeDate = getArguments().getString(ARG_BEFORE);
-            releaseAfterDate = getArguments().getString(ARG_AFTER);
-            filterModel.setReleaseBeforeDate(releaseBeforeDate);
-            filterModel.setReleaseAfterDate(releaseAfterDate);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            setValuesFromBundle(bundle);
         }
 
         FragmentFilterBinding fragmentFilterBinding = DataBindingUtil.inflate(
-                inflater,R.layout.fragment_filter,
-                container,false);
+                inflater, R.layout.fragment_filter,
+                container, false);
 
         fragmentFilterBinding.setViewModel(filterModel);
         View view = fragmentFilterBinding.getRoot();
+        initFragmentView(view);
+        return view;
+    }
 
+    private void setValuesFromBundle(Bundle bundle) {
+        releaseBeforeDate = bundle.getString(ARG_BEFORE);
+        releaseAfterDate = bundle.getString(ARG_AFTER);
+        filterModel.setReleaseBeforeDate(releaseBeforeDate);
+        filterModel.setReleaseAfterDate(releaseAfterDate);
+    }
+
+    private void initFragmentView(View view) {
         view.findViewById(R.id.etReleaseDateLTE).setOnClickListener(this);
         view.findViewById(R.id.etReleaseDateGTE).setOnClickListener(this);
         view.findViewById(R.id.btnApply).setOnClickListener(this);
         view.findViewById(R.id.btnClearFilter).setOnClickListener(this);
 
-        return view;
     }
 
     final DatePickerDialog.OnDateSetListener onBeforeDateSetListener =
             new DatePickerDialog.OnDateSetListener() {
 
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            dateCalendar.set(Calendar.YEAR, year);
-            dateCalendar.set(Calendar.MONTH, monthOfYear);
-            dateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            filterModel.setReleaseBeforeDate(sdf.format(dateCalendar.getTime()));
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                      int dayOfMonth) {
+                    dateCalendar.set(Calendar.YEAR, year);
+                    dateCalendar.set(Calendar.MONTH, monthOfYear);
+                    dateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    filterModel.setReleaseBeforeDate(sdf.format(dateCalendar.getTime()));
 
-        }
-
-    };
+                }
+            };
 
 
     DatePickerDialog.OnDateSetListener onAfterDateSetListener =
             new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                      int dayOfMonth) {
+                    dateCalendar.set(Calendar.YEAR, year);
+                    dateCalendar.set(Calendar.MONTH, monthOfYear);
+                    dateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    filterModel.setReleaseAfterDate(sdf.format(dateCalendar.getTime()));
+                }
+            };
 
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            dateCalendar.set(Calendar.YEAR, year);
-            dateCalendar.set(Calendar.MONTH, monthOfYear);
-            dateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            filterModel.setReleaseAfterDate(sdf.format(dateCalendar.getTime()));
-
-        }
-
-    };
-    void showBeforeDateDialog(){
+    void showBeforeDateDialog() {
         new DatePickerDialog(Objects.requireNonNull(getContext()),
                 onBeforeDateSetListener, dateCalendar
                 .get(Calendar.YEAR), dateCalendar.get(Calendar.MONTH),
                 dateCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    void showAfterDateDialog(){
+    void showAfterDateDialog() {
         new DatePickerDialog(Objects.requireNonNull(getContext()),
                 onAfterDateSetListener, dateCalendar
                 .get(Calendar.YEAR), dateCalendar.get(Calendar.MONTH),
                 dateCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.etReleaseDateLTE:
                 showBeforeDateDialog();
                 break;
@@ -150,16 +145,14 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
                 filterModel.setReleaseAfterDate("");
                 openListingFragment();
                 break;
+            default:
+                break;
         }
     }
 
     private void openListingFragment() {
-
         MovieListingFragment movieListingFragment = MovieListingFragment.newInstance(
                 filterModel.getReleaseBeforeDate(), filterModel.getReleaseAfterDate());
         fragmentTrasition(movieListingFragment);
-
     }
-
-
 }

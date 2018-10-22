@@ -16,24 +16,14 @@ public class MovieDetailViewModel extends AndroidViewModel {
     private MoviesRepository moviesRepository;
     private Picasso picasso;
 
-    private LiveData<MovieDetail> movieDetail;
-
-
     public MovieDetailViewModel(@NonNull Application application) {
         super(application);
-
         moviesRepository = ((TaskApplication)(getApplication())).getMoviesRepository();
         picasso = ((TaskApplication)(getApplication())).getPicasso();
     }
 
-
     public LiveData<MovieDetail> fetchMovieDetail(Integer movieId) {
-        movieDetail = moviesRepository.getMovieDetail(movieId);
-        return movieDetail;
-    }
-
-    public LiveData<MovieDetail> getMovieDetail() {
-        return movieDetail;
+        return moviesRepository.getMovieDetail(movieId);
     }
 
     public Picasso getPicasso() {

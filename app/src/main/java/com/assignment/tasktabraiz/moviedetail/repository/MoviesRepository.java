@@ -1,7 +1,6 @@
 package com.assignment.tasktabraiz.moviedetail.repository;
 
 
-
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
@@ -22,43 +21,44 @@ public class MoviesRepository {
 
     private WebService webService;
 
+    private final MutableLiveData<BaseResponse<List<MovieData>>> movieLivaData = new MutableLiveData<>();
+
+    final MutableLiveData<MovieDetail> movieDetailMutableLiveData = new MutableLiveData<>();
+
     public MoviesRepository(WebService webService) {
 
         this.webService = webService;
     }
 
-    public LiveData<BaseResponse< List<MovieData> >> discoverMovies(Integer pageNumber,String lteReleaseDate,String gteReleaseDate) {
-        final MutableLiveData<BaseResponse<List<MovieData>>> data = new MutableLiveData<>();
-        Call<BaseResponse <List<MovieData>>> movielistCall = webService.discoverMovies(pageNumber,lteReleaseDate,gteReleaseDate);
+    public LiveData<BaseResponse<List<MovieData>>> discoverMovies(Integer pageNumber, String lteReleaseDate, String gteReleaseDate) {
+        Call<BaseResponse<List<MovieData>>> movielistCall = webService.discoverMovies(pageNumber, lteReleaseDate, gteReleaseDate);
         movielistCall.enqueue(new Callback<BaseResponse<List<MovieData>>>() {
             @Override
             public void onResponse(@NonNull Call<BaseResponse<List<MovieData>>> call, @NonNull Response<BaseResponse<List<MovieData>>> response) {
-                data.setValue(response.body());
-
+                movieLivaData.postValue(response.body());
             }
 
             @Override
             public void onFailure(@NonNull Call<BaseResponse<List<MovieData>>> call, @NonNull Throwable t) {
-                data.setValue(null);
+                movieLivaData.postValue(null);
             }
         });
-        return data;
+        return movieLivaData;
     }
 
     public LiveData<MovieDetail> getMovieDetail(Integer movieId) {
-        final MutableLiveData<MovieDetail> data = new MutableLiveData<>();
         Call<MovieDetail> movieDetailCall = webService.getMovieDetail(movieId);
         movieDetailCall.enqueue(new Callback<MovieDetail>() {
             @Override
             public void onResponse(@NonNull Call<MovieDetail> call, @NonNull Response<MovieDetail> response) {
-                data.setValue(response.body());
+                movieDetailMutableLiveData.postValue(response.body());
             }
 
             @Override
             public void onFailure(@NonNull Call<MovieDetail> call, @NonNull Throwable t) {
-                data.setValue(null);
+                movieDetailMutableLiveData.postValue(null);
             }
         });
-        return data;
+        return movieDetailMutableLiveData;
     }
 }

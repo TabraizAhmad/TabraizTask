@@ -9,36 +9,27 @@ import com.assignment.tasktabraiz.di.applicationDI.module.ContextModule;
 import com.assignment.tasktabraiz.moviedetail.repository.MoviesRepository;
 import com.squareup.picasso.Picasso;
 
-import javax.inject.Inject;
-
 public class TaskApplication extends Application {
-
-    private MoviesRepository moviesRepository;
-
-    private Picasso picasso;
 
     private TaskApplicationCompenent daggerApplicationCompenent;
 
-    public void createComponent(){
+    public void createComponent() {
         daggerApplicationCompenent = DaggerTaskApplicationCompenent.builder()
                 .contextModule(new ContextModule(this))
                 .build();
-        moviesRepository = daggerApplicationCompenent.getMoviesRepository();
-        picasso = daggerApplicationCompenent.getPicasso();
     }
 
-    public static TaskApplication get(Context context){
+    public static TaskApplication get(Context context) {
         return (TaskApplication) context.getApplicationContext();
     }
 
     public Picasso getPicasso() {
-        return picasso;
+        return daggerApplicationCompenent.getPicasso();
     }
 
     public MoviesRepository getMoviesRepository() {
-        return moviesRepository;
+        return daggerApplicationCompenent.getMoviesRepository();
     }
-
 
     public TaskApplicationCompenent getDaggerApplicationCompenent() {
         return daggerApplicationCompenent;

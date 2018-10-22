@@ -16,7 +16,7 @@ public interface WebService {
 
     @GET("discover/movie")
     Call<BaseResponse<List<MovieData> >> discoverMovies(@Query("page") Integer pageNumber,@Query("primary_release_date.lte") String lteReleaseDate,@Query("primary_release_date.gte") String gteReleaseDate);
-    /*https://api.themoviedb.org/3/movie/446021?api_key=2407c5b64dcc861154b74d67cab3450c*/
+
     @GET("movie/{movieId}")
     Call<MovieDetail> getMovieDetail(@Path("movieId") Integer movieId);
 

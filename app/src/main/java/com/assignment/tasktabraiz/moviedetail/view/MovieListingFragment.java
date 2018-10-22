@@ -30,7 +30,7 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
-public class MovieListingFragment extends BaseFragment implements View.OnClickListener{
+public class MovieListingFragment extends BaseFragment implements View.OnClickListener {
 
     private RecyclerView moviesListRecyclerView;
 
@@ -44,7 +44,7 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
 
     private MoviesViewModel moviesViewModel;
 
-    private boolean isLastPage =false;
+    private boolean isLastPage = false;
     private boolean isLoading = false;
 
     private String lteReleaseDate = "";
@@ -57,7 +57,7 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
         // Required empty public constructor
     }
 
-    public static MovieListingFragment newInstance(String resleaseBefore,String releaseAfter) {
+    public static MovieListingFragment newInstance(String resleaseBefore, String releaseAfter) {
         MovieListingFragment fragment = new MovieListingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_BEFORE, resleaseBefore);
@@ -65,42 +65,39 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
         fragment.setArguments(args);
         return fragment;
     }
+
     public static MovieListingFragment newInstance() {
         return new MovieListingFragment();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_movie_listing, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie_listing, container, false);
+        initView(view);
+        currentPage = PAGE_START;
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            lteReleaseDate = bundle.getString(ARG_BEFORE);
+            gteReleaseDate = bundle.getString(ARG_AFTER);
+        }
+        return view;
+    }
+
+    private void initView(View view) {
         moviesListRecyclerView = view.findViewById(R.id.moviesList);
         progressBar = view.findViewById(R.id.progressBar);
         offlineContainer = view.findViewById(R.id.layoutOffline);
-
         view.findViewById(R.id.btnFilter).setOnClickListener(this);
         view.findViewById(R.id.btnTryAgain).setOnClickListener(this);
-
-        currentPage = PAGE_START;
-        if (getArguments() != null) {
-            lteReleaseDate = getArguments().getString(ARG_BEFORE);
-            gteReleaseDate = getArguments().getString(ARG_AFTER);
-        }
-
-        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MovieListingFragmentComponent component = DaggerMovieListingFragmentComponent.builder()
-                .taskApplicationCompenent(( (TaskApplication)(
+                .taskApplicationCompenent(((TaskApplication) (
                         Objects.requireNonNull(getActivity()).getApplication()))
                         .getDaggerApplicationCompenent())
                 .build();
@@ -122,85 +119,80 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
         }
     }
 
-
     private void showHideOfflineLayout(boolean isOffline) {
         offlineContainer.setVisibility(isOffline ? View.VISIBLE : View.GONE);
         moviesListRecyclerView.setVisibility(isOffline ? View.GONE : View.VISIBLE);
         progressBar.setVisibility(isOffline ? View.GONE : View.VISIBLE);
     }
 
-
     private void loadNextPage() {
-        moviesViewModel.discoverMovies(currentPage,lteReleaseDate,gteReleaseDate)
+        moviesViewModel.discoverMovies(currentPage, lteReleaseDate, gteReleaseDate)
                 .observe(this, response -> {
                     if (response != null) {
                         List<MovieData> movieDataList = response.getResults();
-
                         movieListingAdapter.removeLoadingFooter();
                         isLoading = false;
                         hideView(progressBar);
-
-                        movieListingAdapter.addAll( movieDataList );
+                        movieListingAdapter.addAll(movieDataList);
                         TOTAL_PAGES = response.getTotalPages();
-
                         if (currentPage <= TOTAL_PAGES && movieDataList.size() > 1)
                             movieListingAdapter.addLoadingFooter();
                         else isLastPage = true;
-                    }else{
+                    } else {
                         showHideOfflineLayout(true);
                     }
                 });
     }
 
     private void initRecyclerView() {
-            List<MovieData> movieDataArrayList = new ArrayList<>();
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-            moviesListRecyclerView.setLayoutManager(linearLayoutManager);
-            moviesListRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            movieListingAdapter.setItems(movieDataArrayList);
-            moviesListRecyclerView.setAdapter(movieListingAdapter);
-            moviesListRecyclerView.addOnScrollListener(
-                    new PaginationScrollListener(linearLayoutManager) {
-                @Override
-                protected void loadMoreItems() {
-                    isLoading = true;
-                    currentPage += 1;
-                    loadNextPage();
-                }
+        List<MovieData> movieDataArrayList = new ArrayList<>();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        moviesListRecyclerView.setLayoutManager(linearLayoutManager);
+        moviesListRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        movieListingAdapter.setItems(movieDataArrayList);
+        moviesListRecyclerView.setAdapter(movieListingAdapter);
+        moviesListRecyclerView.addOnScrollListener(
+                new PaginationScrollListener(linearLayoutManager) {
+                    @Override
+                    protected void loadMoreItems() {
+                        isLoading = true;
+                        currentPage += 1;
+                        loadNextPage();
+                    }
 
-                @Override
-                public int getTotalPageCount() {
-                    return TOTAL_PAGES;
-                }
+                    @Override
+                    public int getTotalPageCount() {
+                        return TOTAL_PAGES;
+                    }
 
-                @Override
-                public boolean isLastPage() {
-                    return isLastPage;
-                }
+                    @Override
+                    public boolean isLastPage() {
+                        return isLastPage;
+                    }
 
-                @Override
-                public boolean isLoading() {
-                    return isLoading;
-                }
-            });
+                    @Override
+                    public boolean isLoading() {
+                        return isLoading;
+                    }
+                });
 
-            moviesListRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
-                    getActivity(), moviesListRecyclerView, new
-                    RecyclerItemClickListener.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    if(movieDataArrayList.get(position) != null){
-                        Integer movieId = movieDataArrayList.get(position).getId();
-                        openMovieDetailFragment(movieId);
+        moviesListRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
+                getActivity(), moviesListRecyclerView, new
+                RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        if (movieDataArrayList.get(position) != null) {
+                            Integer movieId = movieDataArrayList.get(position).getId();
+                            openMovieDetailFragment(movieId);
+                        }
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+
                     }
                 }
-
-                @Override
-                public void onItemLongClick(View view, int position) {
-
-                }
-            }
-            ));
+        ));
     }
 
     private void openMovieDetailFragment(int movieId) {
@@ -210,7 +202,7 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnFilter:
                 openFilterFragment();
                 break;
@@ -222,7 +214,7 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
     }
 
     private void openFilterFragment() {
-        FilterFragment filterFragment = FilterFragment.newInstance(lteReleaseDate,gteReleaseDate);
+        FilterFragment filterFragment = FilterFragment.newInstance(lteReleaseDate, gteReleaseDate);
         fragmentTrasition(filterFragment);
     }
 }

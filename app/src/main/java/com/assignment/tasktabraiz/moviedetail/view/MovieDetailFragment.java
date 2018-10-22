@@ -55,36 +55,36 @@ public class MovieDetailFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            movieId = getArguments().getInt(ARG_MOVIE_ID);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            movieId = bundle.getInt(ARG_MOVIE_ID);
         }
-
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         movieDetailViewModel = ViewModelProviders.of(this).get(MovieDetailViewModel.class);
-
         MovieDetailFragmentComponent component = DaggerMovieDetailFragmentComponent.builder()
                 .taskApplicationCompenent((
                         (TaskApplication) Objects.requireNonNull(getActivity()).getApplication())
                         .getDaggerApplicationCompenent())
                 .build();
         component.injectMovieDetailFragment(this);
-
         fragmentMovieDetailBinding = DataBindingUtil.inflate(
                 inflater,R.layout.fragment_movie_detail,
                 container,false,
                 new DefaultDataBindingComponent(picasso));
         View view = fragmentMovieDetailBinding.getRoot();
+        initView(view);
+        return view;
+    }
 
+    private void initView(View view) {
         progressBar = view.findViewById(R.id.progressBar);
         offlineContainer = view.findViewById(R.id.layoutOffline);
         movieDetailLayout = view.findViewById(R.id.movieDetailLayout);
         view.findViewById(R.id.btnTryAgain).setOnClickListener(this);
-
-        return view;
     }
 
     @Override
@@ -122,9 +122,7 @@ public class MovieDetailFragment extends BaseFragment implements View.OnClickLis
     private void showHideOfflineLayout(boolean isOffline) {
         offlineContainer.setVisibility(isOffline ? View.VISIBLE : View.GONE);
         progressBar.setVisibility(isOffline ? View.GONE : View.VISIBLE);
-
     }
-
 
     @Override
     public void onClick(View v) {

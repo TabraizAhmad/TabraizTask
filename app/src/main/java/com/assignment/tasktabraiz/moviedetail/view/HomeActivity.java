@@ -14,7 +14,6 @@ public class HomeActivity extends BaseActivity {
         ((TaskApplication)getApplication()).createComponent();
         setContentView(R.layout.activity_home);
         if(savedInstanceState == null)  {
-
             replaceFragment(R.id.fragment_container, MovieListingFragment.newInstance(),
                     false);
         }

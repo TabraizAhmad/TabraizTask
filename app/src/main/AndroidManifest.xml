@@ -14,7 +14,6 @@
         android:name=".application.TaskApplication">
         <activity android:name=".moviedetail.view.HomeActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

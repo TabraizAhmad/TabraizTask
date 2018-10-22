@@ -95,8 +95,13 @@ public class MovieListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void add(MovieData movieData) {
-        movieDataList.add(movieData);
-        notifyItemChanged(movieDataList.size() -1);
+        if (!movieDataList.contains(movieData)) {
+            movieDataList.add(movieData);
+            notifyItemInserted(movieDataList.size() - 1);
+        } else {
+            movieDataList.set(movieDataList.indexOf(movieData), movieData);
+            notifyItemChanged(movieDataList.indexOf(movieData));
+        }
     }
 
     public void addLoadingFooter() {

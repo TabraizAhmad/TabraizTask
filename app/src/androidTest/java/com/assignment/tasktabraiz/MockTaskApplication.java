@@ -8,27 +8,21 @@ import com.squareup.picasso.Picasso;
 
 public class MockTaskApplication extends TaskApplication {
 
-    private MoviesRepository moviesRepository;
-    private Picasso picasso;
-
     private TaskApplicationCompenent daggerApplicationCompenent;
 
     @Override
     public void createComponent() {
         daggerApplicationCompenent = DaggerMockApplicationCompenent.builder()
                 .build();
-        picasso = daggerApplicationCompenent.getPicasso();
-        moviesRepository = daggerApplicationCompenent.getMoviesRepository();
     }
 
     public Picasso getPicasso() {
-        return picasso;
+        return daggerApplicationCompenent.getPicasso();
     }
 
     public MoviesRepository getMoviesRepository() {
-        return moviesRepository;
+        return daggerApplicationCompenent.getMoviesRepository();
     }
-
 
     public TaskApplicationCompenent getDaggerApplicationCompenent() {
         return daggerApplicationCompenent;
