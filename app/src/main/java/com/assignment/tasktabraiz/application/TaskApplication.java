@@ -13,9 +13,9 @@ import javax.inject.Inject;
 
 public class TaskApplication extends Application {
 
-    MoviesRepository moviesRepository;
+    private MoviesRepository moviesRepository;
 
-    Picasso picasso;
+    private Picasso picasso;
 
     private TaskApplicationCompenent daggerApplicationCompenent;
 

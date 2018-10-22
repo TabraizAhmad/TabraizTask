@@ -8,8 +8,8 @@ import com.squareup.picasso.Picasso;
 
 public class MockTaskApplication extends TaskApplication {
 
-    MoviesRepository moviesRepository;
-    Picasso picasso;
+    private MoviesRepository moviesRepository;
+    private Picasso picasso;
 
     private TaskApplicationCompenent daggerApplicationCompenent;
 
