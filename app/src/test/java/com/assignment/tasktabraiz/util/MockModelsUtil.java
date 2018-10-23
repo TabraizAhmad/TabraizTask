@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class MockModelsUtil {
 
-    public static MovieData createMockMovie() {
+    private static MovieData createMockMovie() {
         MovieData movie = new MovieData();
         movie.setId(new Random().nextInt());
         movie.setTitle("Title by Tabraiz");
@@ -26,14 +26,14 @@ public class MockModelsUtil {
         return movie;
     }
 
-    public static MovieData createMockMovieyWithId(int id) {
+    public static MovieData createMockMovieWithId(int id) {
         MovieData movie = createMockMovie();
         movie.setId(id);
         return movie;
     }
 
 
-    public static List<MovieData> createMockMoviesWithId(List<Integer> id) {
+    private static List<MovieData> createMockMoviesWithId(List<Integer> id) {
         List<MovieData> movies = new ArrayList<>();
         for (int i = 0; i < id.size(); i++) {
             MovieData movie = createMockMovie();

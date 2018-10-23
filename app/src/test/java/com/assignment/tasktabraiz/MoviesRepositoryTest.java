@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 @Config(manifest= Config.NONE)
 public class MoviesRepositoryTest {
 
-    MoviesRepository moviesRepository;
+    private MoviesRepository moviesRepository;
 
     @Before
     public void setUp() {

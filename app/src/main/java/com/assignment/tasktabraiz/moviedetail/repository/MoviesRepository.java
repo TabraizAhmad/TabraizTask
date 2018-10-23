@@ -23,7 +23,7 @@ public class MoviesRepository {
 
     private final MutableLiveData<BaseResponse<List<MovieData>>> movieLivaData = new MutableLiveData<>();
 
-    final MutableLiveData<MovieDetail> movieDetailMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<MovieDetail> movieDetailMutableLiveData = new MutableLiveData<>();
 
     public MoviesRepository(WebService webService) {
 
@@ -31,8 +31,8 @@ public class MoviesRepository {
     }
 
     public LiveData<BaseResponse<List<MovieData>>> discoverMovies(Integer pageNumber, String lteReleaseDate, String gteReleaseDate) {
-        Call<BaseResponse<List<MovieData>>> movielistCall = webService.discoverMovies(pageNumber, lteReleaseDate, gteReleaseDate);
-        movielistCall.enqueue(new Callback<BaseResponse<List<MovieData>>>() {
+        Call<BaseResponse<List<MovieData>>> movieListCall = webService.discoverMovies(pageNumber, lteReleaseDate, gteReleaseDate);
+        movieListCall.enqueue(new Callback<BaseResponse<List<MovieData>>>() {
             @Override
             public void onResponse(@NonNull Call<BaseResponse<List<MovieData>>> call, @NonNull Response<BaseResponse<List<MovieData>>> response) {
                 movieLivaData.postValue(response.body());

@@ -50,17 +50,17 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
     private String lteReleaseDate = "";
     private String gteReleaseDate = "";
 
-    public static final String ARG_BEFORE = "beforeDate";
-    public static final String ARG_AFTER = "afterDate";
+    private static final String ARG_BEFORE = "beforeDate";
+    private static final String ARG_AFTER = "afterDate";
 
     public MovieListingFragment() {
         // Required empty public constructor
     }
 
-    public static MovieListingFragment newInstance(String resleaseBefore, String releaseAfter) {
+    public static MovieListingFragment newInstance(String releaseBefore, String releaseAfter) {
         MovieListingFragment fragment = new MovieListingFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_BEFORE, resleaseBefore);
+        args.putString(ARG_BEFORE, releaseBefore);
         args.putString(ARG_AFTER, releaseAfter);
         fragment.setArguments(args);
         return fragment;
@@ -97,9 +97,9 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MovieListingFragmentComponent component = DaggerMovieListingFragmentComponent.builder()
-                .taskApplicationCompenent(((TaskApplication) (
+                .taskApplicationComponent(((TaskApplication) (
                         Objects.requireNonNull(getActivity()).getApplication()))
-                        .getDaggerApplicationCompenent())
+                        .getDaggerApplicationComponent())
                 .build();
         component.injectMovieListingFragment(this);
         moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
@@ -161,11 +161,6 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
                     }
 
                     @Override
-                    public int getTotalPageCount() {
-                        return TOTAL_PAGES;
-                    }
-
-                    @Override
                     public boolean isLastPage() {
                         return isLastPage;
                     }
@@ -180,16 +175,11 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
                 getActivity(), moviesListRecyclerView, new
                 RecyclerItemClickListener.OnItemClickListener() {
                     @Override
-                    public void onItemClick(View view, int position) {
+                    public void onItemClick(int position) {
                         if (movieDataArrayList.get(position) != null) {
                             Integer movieId = movieDataArrayList.get(position).getId();
                             openMovieDetailFragment(movieId);
                         }
-                    }
-
-                    @Override
-                    public void onItemLongClick(View view, int position) {
-
                     }
                 }
         ));
@@ -197,7 +187,7 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
 
     private void openMovieDetailFragment(int movieId) {
         MovieDetailFragment fragment = MovieDetailFragment.newInstance(movieId);
-        fragmentTrasition(fragment);
+        fragmentTransition(fragment);
     }
 
     @Override
@@ -215,6 +205,6 @@ public class MovieListingFragment extends BaseFragment implements View.OnClickLi
 
     private void openFilterFragment() {
         FilterFragment filterFragment = FilterFragment.newInstance(lteReleaseDate, gteReleaseDate);
-        fragmentTrasition(filterFragment);
+        fragmentTransition(filterFragment);
     }
 }

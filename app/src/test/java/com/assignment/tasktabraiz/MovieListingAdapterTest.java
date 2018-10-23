@@ -22,9 +22,6 @@ public class MovieListingAdapterTest {
 
     @Mock
     Picasso picasso;
-    @Before
-    public void beforeTest() {
-    }
 
     @Test
     public void itemCount() {
@@ -37,7 +34,7 @@ public class MovieListingAdapterTest {
     public void getFirstItemId() {
         int idMockMovie = 123;
         ArrayList<MovieData> movies = new ArrayList<>();
-        MovieData movie = MockModelsUtil.createMockMovieyWithId(idMockMovie);
+        MovieData movie = MockModelsUtil.createMockMovieWithId(idMockMovie);
         movies.add(movie);
         MovieListingAdapter movieListingAdapter = new MovieListingAdapter(picasso);
         movieListingAdapter.setItems(movies);

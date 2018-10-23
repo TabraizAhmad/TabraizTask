@@ -26,8 +26,4 @@ public class MovieDetailViewModel extends AndroidViewModel {
         return moviesRepository.getMovieDetail(movieId);
     }
 
-    public Picasso getPicasso() {
-        return picasso;
-    }
-
 }

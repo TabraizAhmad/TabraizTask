@@ -66,9 +66,9 @@ public class MovieDetailFragment extends BaseFragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         movieDetailViewModel = ViewModelProviders.of(this).get(MovieDetailViewModel.class);
         MovieDetailFragmentComponent component = DaggerMovieDetailFragmentComponent.builder()
-                .taskApplicationCompenent((
+                .taskApplicationComponent((
                         (TaskApplication) Objects.requireNonNull(getActivity()).getApplication())
-                        .getDaggerApplicationCompenent())
+                        .getDaggerApplicationComponent())
                 .build();
         component.injectMovieDetailFragment(this);
         fragmentMovieDetailBinding = DataBindingUtil.inflate(

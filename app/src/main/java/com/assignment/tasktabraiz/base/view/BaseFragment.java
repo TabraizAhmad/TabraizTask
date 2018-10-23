@@ -14,7 +14,7 @@ public class BaseFragment extends Fragment {
     protected LinearLayout offlineContainer;
     protected ProgressBar progressBar;
 
-    public void fragmentTrasition(Fragment fragment){
+    public void fragmentTransition(Fragment fragment){
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.addToBackStack(null);

@@ -9,7 +9,7 @@ import com.squareup.picasso.Picasso;
 import dagger.Component;
 @TaskApplicationScope
 @Component(modules = {MoviesRepositoryModule.class, PicassoModule.class} )
-public interface TaskApplicationCompenent  {
+public interface TaskApplicationComponent {
 
     Picasso getPicasso();
     MoviesRepository getMoviesRepository();

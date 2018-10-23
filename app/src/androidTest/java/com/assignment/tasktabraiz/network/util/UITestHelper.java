@@ -17,6 +17,7 @@ import org.hamcrest.Matcher;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -27,8 +28,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 
 public class UITestHelper {
 
-    public static void enqueRequestWithJsonAndStatusCode(MockWebServer server, int statusCode,
-                                                         String fileName, Context context) {
+    public static void enqueueRequestWithJsonAndStatusCode(MockWebServer server, int statusCode,
+                                                           String fileName, Context context) {
         MockResponse mockResponse = new MockResponse()
                 .setResponseCode(statusCode);
         if (fileName != null) {
@@ -40,7 +41,7 @@ public class UITestHelper {
     }
 
 
-    public static String loadJSONFromAsset(Context context, String fileName) {
+    private static String loadJSONFromAsset(Context context, String fileName) {
 
         String json;
 
@@ -53,7 +54,7 @@ public class UITestHelper {
             is.read(buffer);
             is.close();
 
-            json = new String(buffer, "UTF-8");
+            json = new String(buffer, StandardCharsets.UTF_8);
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;

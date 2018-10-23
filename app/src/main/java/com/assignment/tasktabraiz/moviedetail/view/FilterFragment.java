@@ -24,11 +24,11 @@ import javax.inject.Inject;
 
 public class FilterFragment extends BaseFragment implements View.OnClickListener {
 
-    public static final String ARG_BEFORE = "beforeDate";
-    public static final String ARG_AFTER = "afterDate";
+    private static final String ARG_BEFORE = "beforeDate";
+    private static final String ARG_AFTER = "afterDate";
 
-    String releaseBeforeDate;
-    String releaseAfterDate;
+    private String releaseBeforeDate;
+    private String releaseAfterDate;
 
     @Inject
     Calendar dateCalendar;
@@ -43,10 +43,10 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
         // Required empty public constructor
     }
 
-    public static FilterFragment newInstance(String resleaseBefore, String releaseAfter) {
+    public static FilterFragment newInstance(String releaseBefore, String releaseAfter) {
         FilterFragment fragment = new FilterFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_BEFORE, resleaseBefore);
+        args.putString(ARG_BEFORE, releaseBefore);
         args.putString(ARG_AFTER, releaseAfter);
         fragment.setArguments(args);
         return fragment;
@@ -87,7 +87,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
 
     }
 
-    final DatePickerDialog.OnDateSetListener onBeforeDateSetListener =
+    private final DatePickerDialog.OnDateSetListener onBeforeDateSetListener =
             new DatePickerDialog.OnDateSetListener() {
 
                 @Override
@@ -102,7 +102,7 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
             };
 
 
-    DatePickerDialog.OnDateSetListener onAfterDateSetListener =
+    private DatePickerDialog.OnDateSetListener onAfterDateSetListener =
             new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -114,14 +114,14 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
                 }
             };
 
-    void showBeforeDateDialog() {
+    private void showBeforeDateDialog() {
         new DatePickerDialog(Objects.requireNonNull(getContext()),
                 onBeforeDateSetListener, dateCalendar
                 .get(Calendar.YEAR), dateCalendar.get(Calendar.MONTH),
                 dateCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    void showAfterDateDialog() {
+    private void showAfterDateDialog() {
         new DatePickerDialog(Objects.requireNonNull(getContext()),
                 onAfterDateSetListener, dateCalendar
                 .get(Calendar.YEAR), dateCalendar.get(Calendar.MONTH),
@@ -153,6 +153,6 @@ public class FilterFragment extends BaseFragment implements View.OnClickListener
     private void openListingFragment() {
         MovieListingFragment movieListingFragment = MovieListingFragment.newInstance(
                 filterModel.getReleaseBeforeDate(), filterModel.getReleaseAfterDate());
-        fragmentTrasition(movieListingFragment);
+        fragmentTransition(movieListingFragment);
     }
 }

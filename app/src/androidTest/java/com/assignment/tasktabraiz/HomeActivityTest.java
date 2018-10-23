@@ -59,34 +59,34 @@ public class HomeActivityTest extends InstrumentationTestCase {
 
     @Test
     public void mainActivityTest() throws Exception {
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 200, MOVIES_LIST_JSON, getInstrumentation().getContext());
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 200, MOVIES_LIST_JSON, getInstrumentation().getContext());
         launchActivity();
         onView(withId(R.id.moviesList)).check(matches(UITestHelper.atPosition(0, withText("Halloween"))));
     }
 
     @Test
     public void noMovieFromApiCall() throws Exception {
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 200, null, getInstrumentation().getContext());
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 200, null, getInstrumentation().getContext());
         launchActivity();
-        Assert.assertEquals(0, getRecyclyViewItemCount());
+        Assert.assertEquals(0, getRecyclerViewItemCount());
     }
 
     @Test
     public void errorFetchingMoviesFromServer() throws Exception {
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 500, null, getInstrumentation().getContext());
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 500, null, getInstrumentation().getContext());
         launchActivity();
-        Assert.assertEquals(0, getRecyclyViewItemCount());
+        Assert.assertEquals(0, getRecyclerViewItemCount());
     }
 
     @Test
     public void movieDetailTest() throws Exception {
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 200, MOVIES_LIST_JSON, getInstrumentation().getContext());
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 200, MOVIES_LIST_JSON, getInstrumentation().getContext());
         launchActivity();
         onView(withId(R.id.moviesList)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, UITestHelper.touchDownAndUp()));
 
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 200, MOVIE_DETAIL_JSON, getInstrumentation().getContext());
-        Thread.sleep(200);
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 200, MOVIE_DETAIL_JSON, getInstrumentation().getContext());
+        Thread.sleep(600);
         //just checking the release date
         onView(withId(R.id.releaseDate)).check(matches(withText("2018-10-18")));
     }
@@ -94,14 +94,14 @@ public class HomeActivityTest extends InstrumentationTestCase {
 
     @Test
     public void noMovieDetail() throws Exception {
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 200, MOVIES_LIST_JSON, getInstrumentation().getContext());
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 200, MOVIES_LIST_JSON, getInstrumentation().getContext());
         launchActivity();
         onView(withId(R.id.moviesList)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, UITestHelper.touchDownAndUp()));
 
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 200, null, getInstrumentation().getContext());
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 200, null, getInstrumentation().getContext());
 
-        Thread.sleep(200);
+        Thread.sleep(600);
         //if detail layout is present or not
         onView(withId(R.id.movieDetailLayout)).check(matches(not(isDisplayed())));
 
@@ -110,13 +110,13 @@ public class HomeActivityTest extends InstrumentationTestCase {
 
     @Test
     public void tryAgainButton() throws Exception {
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 500, MOVIES_LIST_JSON, getInstrumentation().getContext());
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 500, MOVIES_LIST_JSON, getInstrumentation().getContext());
         launchActivity();
         Thread.sleep(200);
         onView(withId(R.id.btnTryAgain)).perform(
                 click());
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 200, MOVIES_LIST_JSON, getInstrumentation().getContext());
-        Thread.sleep(200);
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 200, MOVIES_LIST_JSON, getInstrumentation().getContext());
+        Thread.sleep(600);
         onView(withId(R.id.moviesList)).check(matches(UITestHelper.atPosition(0, withText("Halloween"))));
 
     }
@@ -125,11 +125,11 @@ public class HomeActivityTest extends InstrumentationTestCase {
 
     @Test
     public void errorFetchingMovieDetailFromId() throws Exception {
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 200, MOVIES_LIST_JSON, getInstrumentation().getContext());
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 200, MOVIES_LIST_JSON, getInstrumentation().getContext());
         launchActivity();
         onView(withId(R.id.moviesList)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, UITestHelper.touchDownAndUp()));
-        UITestHelper.enqueRequestWithJsonAndStatusCode(server, 404, MOVIE_DETAIL_JSON, getInstrumentation().getContext());
+        UITestHelper.enqueueRequestWithJsonAndStatusCode(server, 404, MOVIE_DETAIL_JSON, getInstrumentation().getContext());
         Thread.sleep(200);
         //just if detail layout is present or not
         onView(withId(R.id.movieDetailLayout)).check(matches(not(isDisplayed())));
@@ -141,7 +141,7 @@ public class HomeActivityTest extends InstrumentationTestCase {
         server.shutdown();
     }
 
-    private int getRecyclyViewItemCount() {
+    private int getRecyclerViewItemCount() {
         RecyclerView recyclerView = mActivityTestRule.getActivity().findViewById(R.id.moviesList);
         return recyclerView.getAdapter().getItemCount();
     }

@@ -15,7 +15,7 @@ public class PicassoImageViewBinding implements ImageViewBindingInterface {
     }
     @Override
     public void loadImage(ImageView view, String posterPath ) {
-        picasso.load(Constants.POSTER_IMAGE_BASEPATH + posterPath ).placeholder(R.drawable.placeholder_movie)
+        picasso.load(Constants.POSTER_IMAGE_BASE_PATH + posterPath ).placeholder(R.drawable.placeholder_movie)
                 .into(view);
     }
 }

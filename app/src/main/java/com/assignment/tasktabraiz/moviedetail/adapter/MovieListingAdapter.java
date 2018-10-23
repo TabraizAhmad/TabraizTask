@@ -140,7 +140,7 @@ public class MovieListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
 
-    protected class LoadingVH extends RecyclerView.ViewHolder{
+    class LoadingVH extends RecyclerView.ViewHolder{
         LoadingVH(View itemView) {
             super(itemView);
         }

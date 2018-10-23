@@ -3,35 +3,31 @@ package com.assignment.tasktabraiz.application;
 import android.app.Application;
 import android.content.Context;
 
-import com.assignment.tasktabraiz.di.applicationDI.component.DaggerTaskApplicationCompenent;
-import com.assignment.tasktabraiz.di.applicationDI.component.TaskApplicationCompenent;
+import com.assignment.tasktabraiz.di.applicationDI.component.DaggerTaskApplicationComponent;
+import com.assignment.tasktabraiz.di.applicationDI.component.TaskApplicationComponent;
 import com.assignment.tasktabraiz.di.applicationDI.module.ContextModule;
 import com.assignment.tasktabraiz.moviedetail.repository.MoviesRepository;
 import com.squareup.picasso.Picasso;
 
 public class TaskApplication extends Application {
 
-    private TaskApplicationCompenent daggerApplicationCompenent;
+    private TaskApplicationComponent daggerApplicationComponent;
 
     public void createComponent() {
-        daggerApplicationCompenent = DaggerTaskApplicationCompenent.builder()
+        daggerApplicationComponent = DaggerTaskApplicationComponent.builder()
                 .contextModule(new ContextModule(this))
                 .build();
     }
 
-    public static TaskApplication get(Context context) {
-        return (TaskApplication) context.getApplicationContext();
-    }
-
     public Picasso getPicasso() {
-        return daggerApplicationCompenent.getPicasso();
+        return daggerApplicationComponent.getPicasso();
     }
 
     public MoviesRepository getMoviesRepository() {
-        return daggerApplicationCompenent.getMoviesRepository();
+        return daggerApplicationComponent.getMoviesRepository();
     }
 
-    public TaskApplicationCompenent getDaggerApplicationCompenent() {
-        return daggerApplicationCompenent;
+    public TaskApplicationComponent getDaggerApplicationComponent() {
+        return daggerApplicationComponent;
     }
 }
